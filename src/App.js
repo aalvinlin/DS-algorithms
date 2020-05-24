@@ -1,8 +1,21 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-export default () => (
-  <>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal than this React app.</p>
-  </>
-);
+import Home from "./components/Home";
+import Dbscan from "./components/Dbscan";
+
+const App = () => 
+{
+  return (
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/dbscan">
+        <Dbscan />
+      </Route>
+    </Switch>
+  );
+}
+
+export default App;
