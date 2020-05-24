@@ -1,4 +1,4 @@
-export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle, randomOffset) => {
+export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle=0, randomOffset=0) => {
 
     let pointsSoFar = 0;
     let points = [];
@@ -10,12 +10,12 @@ export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle
             let randomPointY = h + Math.floor(Math.random() * b) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
 
             points.push([randomPointX, randomPointY]);
-            pointSoFar += 1;
+            pointsSoFar += 1;
         }
 
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
-    return points.filter((point, index) => indexOf[point] === index);
+    return points.filter((point, index) => points.indexOf(point) === index);
 
 }
 
