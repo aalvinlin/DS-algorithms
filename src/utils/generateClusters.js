@@ -7,7 +7,7 @@ export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle
         {
             // determine offset from the origin of the ellipse
             let randomPointX = h + Math.floor(Math.random() * a) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
-            let randomPointY = h + Math.floor(Math.random() * b) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
+            let randomPointY = k + Math.floor(Math.random() * b) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
 
             points.push([randomPointX, randomPointY]);
             pointsSoFar += 1;

@@ -6,7 +6,7 @@ import { generateClusterEllipse } from "../utils/generateClusters";
 
 const Home = () => {
 
-    let cluster1 = generateClusterEllipse(10, 10, 2, 7, 0, 1);
+    let cluster1 = generateClusterEllipse(100, 10, 10, 2, 7, 0, 1);
     let clusterReformatted = cluster1.map((point, id) => { return {"key": point[0], "data": point[1], id}});
 
     let chartJSData = {
