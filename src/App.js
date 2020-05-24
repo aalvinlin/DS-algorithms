@@ -14,6 +14,9 @@ const App = () =>
       <Route exact path="/dbscan">
         <Dbscan />
       </Route>
+      <Route>
+        <Home />
+      </Route>
     </Switch>
   );
 }
