@@ -2,29 +2,28 @@ import React from "react";
 import { ScatterPlot } from "reaviz";
 import { Scatter } from "react-chartjs-2";
 
-import { generateClusterEllipse } from "../utils/generateClusters";
+import { generateClusterEllipse, generateClusterCircle } from "../utils/generateClusters";
 
 const Home = () => {
 
-    let cluster1 = generateClusterEllipse(100, 10, 10, 2, 7, 0, 1);
+    let cluster1 = generateClusterEllipse(100, 10, 10, 20, 7, 0, 1);
+    let cluster2 = generateClusterEllipse(100, 80, 70, 12, 20, 0, 0);
+    let cluster3 = generateClusterCircle(100, 30, 90, 10, 0);
     let clusterReformatted = cluster1.map((point, id) => { return {"key": point[0], "data": point[1], id}});
 
     let chartJSData = {
         datasets: [
             {
-                label: 'Cluster 1',
-                fill: true,
-                backgroundColor: "#666666",
-                pointBorderColor: "#666666",
-                pointBackgroundColor: "#666666",
-                pointBorderWidth: 2,
-                pointHoverRadius: 15,
-                pointHoverBackgroundColor: "#999999",
-                pointHoverBorderColor: "#999999",
-                pointHoverBorderWidth: 0,
-                pointRadius: 10,
-                pointHitRadius: 15,
+                pointBackgroundColor: "#009966",
                 data: cluster1.map((point, id) => { return {"x": point[0], "y": point[1]}})
+            },
+            {
+                pointBackgroundColor: "#0099FF",
+                data: cluster2.map((point, id) => { return {"x": point[0], "y": point[1]}})
+            },
+            {
+                pointBackgroundColor: "#FF9966",
+                data: cluster3.map((point, id) => { return {"x": point[0], "y": point[1]}})
             }
         ]
     };

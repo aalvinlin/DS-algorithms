@@ -19,7 +19,7 @@ export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle
 
 }
 
-export const generateClusterCircle = (numberOfPoints, h, k, r, randomOffset) => {
+export const generateClusterCircle = (numberOfPoints, h, k, r, randomOffset=0) => {
     return generateClusterEllipse(numberOfPoints, h, k, r, r, 0, randomOffset);
 }
 
