@@ -8,7 +8,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chart.js": "^2.9.3",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "reaviz": "^8.1.3"
