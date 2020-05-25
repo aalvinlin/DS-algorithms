@@ -101,3 +101,38 @@ export const set2 = {
         randomOffset: 0.1,
     }
 }
+
+export const set3 = {
+    clusters: [
+        {
+            type: "arc",
+            numberOfPoints: 300,
+            centerX: 60,
+            centerY: 70,
+            radiusOuter: 40,
+            radiusInner: 30,
+            angleDegrees: 120,
+            direction: "less",
+            randomOffset: 0.1,
+            percentChanceOfAddingOutsidePoint: 10
+        },
+        {
+            type: "arc",
+            numberOfPoints: 300,
+            centerX: 60,
+            centerY: 40,
+            radiusOuter: 40,
+            radiusInner: 30,
+            angleDegrees: 120,
+            direction: "greater",
+            randomOffset: 0.1,
+            percentChanceOfAddingOutsidePoint: 10
+        }
+    ],
+    noiseSettings: {
+        numberOfPoints: 100,
+        additionalX: 20,
+        additionalY: 20,
+        randomOffset: 0.1,
+    }
+}

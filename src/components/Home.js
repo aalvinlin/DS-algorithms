@@ -1,13 +1,13 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { set1, set2 } from "../data/data";
+import { set1, set2, set3 } from "../data/data";
 import { createClusters } from "../utils/generateClusters";
 
 const Home = () => {
 
-    let scatterPlot1 = createClusters(set1);
-    let scatterPlot2 = createClusters(set2);
+    let scatterPlot1 = createClusters(set3);
+    // let scatterPlot2 = createClusters(set2);
 
     let chartJSData = {
         datasets: [
@@ -17,12 +17,12 @@ const Home = () => {
                 data: scatterPlot1
 
             },
-            {
-                label: "Scatter Plot #1",
-                pointBackgroundColor: "#339933",
-                data: scatterPlot2
+            // {
+            //     label: "Scatter Plot #1",
+            //     pointBackgroundColor: "#339933",
+            //     data: scatterPlot2
 
-            },
+            // },
         ]
     };
 
