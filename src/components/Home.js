@@ -5,11 +5,66 @@ import { generateClusterEllipse, generateClusterCircle, generateClusterArc } fro
 
 const Home = () => {
 
-    let cluster1 = generateClusterEllipse(100, 10, 10, 20, 7, 0, 0.1);
-    let cluster2 = generateClusterEllipse(100, 80, 70, 12, 20, 0, 0.1);
-    let cluster3 = generateClusterCircle(100, 30, 90, 10, 0.1);
-    let cluster4 = generateClusterArc(100, 20, 50, 20, 15, 30, "less", 0.1);
-    let cluster5 = generateClusterArc(100, 35, 50, 20, 15, 30, "greater", 0.1);
+    let ellipse1 = {
+        numberOfPoints: 100,
+        centerX: 10,
+        centerY: 10,
+        radiusX: 20,
+        radiusY: 7,
+        rotationAngle: 0,
+        randomOffset: 0.1,
+        chanceOfAddingOutsidePoint: 50
+    };
+
+    let ellipse2 = {
+        numberOfPoints: 100,
+        centerX: 80,
+        centerY: 70,
+        radiusX: 12,
+        radiusY: 20,
+        rotationAngle: 0,
+        randomOffset: 0.1,
+        chanceOfAddingOutsidePoint: 50
+    };
+
+    let circle1 = {
+        numberOfPoints: 100,
+        centerX: 30,
+        centerY: 90,
+        radius: 10,
+        randomOffset: 0.1,
+        chanceOfAddingOutsidePoint: 50
+    };
+
+    let arc1 = {
+        numberOfPoints: 100,
+        centerX: 20,
+        centerY: 50,
+        radiusOuter: 20,
+        radiusInner: 15,
+        angle: 30,
+        direction: "less",
+        randomOffset: 0.1,
+        chanceOfAddingOutsidePoint: 50
+    };
+
+    let arc2 = {
+        numberOfPoints: 100,
+        centerX: 35,
+        centerY: 50,
+        radiusOuter: 20,
+        radiusInner: 15,
+        angle: 30,
+        direction: "greater",
+        randomOffset: 0.1,
+        chanceOfAddingOutsidePoint: 50
+    };
+
+    let cluster1 = generateClusterEllipse(ellipse1);
+    let cluster2 = generateClusterEllipse(ellipse2);
+    let cluster3 = generateClusterCircle(circle1);
+    let cluster4 = generateClusterArc(arc1);
+    let cluster5 = generateClusterArc(arc2);
 
     let chartJSData = {
         datasets: [

@@ -1,20 +1,19 @@
-export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle=0, randomOffset=0) => {
+export const generateClusterEllipse = (settings) => {
+
+    let { numberOfPoints, centerX, centerY, radiusX, radiusY, rotationAngle = 0, randomOffset = 0, chanceOfAddingOutsidePoint = 50 } = settings;
 
     let pointsSoFar = 0;
     let points = [];
 
-    // 1/n chance of adding a point outside the shape
-    let chanceOfAddingOutsidePoint = 3;
-
     while (pointsSoFar < numberOfPoints)
         {
             // determine offset from the origin of the ellipse
-            let randomPointX = h + Math.floor(Math.random() * a) * oneOrNegativeOne();
-            let randomPointY = k + Math.floor(Math.random() * b) * oneOrNegativeOne();
+            let randomPointX = centerX + Math.floor(Math.random() * radiusX) * oneOrNegativeOne();
+            let randomPointY = centerY + Math.floor(Math.random() * radiusY) * oneOrNegativeOne();
 
             // add point if it lies in the ellipse, or add the point anyway with a 1/n chance
             if (
-                    (randomPointX - h) ** 2 / (a ** 2) + (randomPointY - k) ** 2 / (b ** 2) <= 1
+                    (randomPointX - centerX) ** 2 / (radiusX ** 2) + (randomPointY - centerY) ** 2 / (radiusY ** 2) <= 1
                     || (!Math.floor(Math.random() * chanceOfAddingOutsidePoint))
                     )
                 {
@@ -33,14 +32,16 @@ export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle
 
 }
 
-export const generateClusterCircle = (numberOfPoints, h, k, r, randomOffset=0) => {
-    return generateClusterEllipse(numberOfPoints, h, k, r, r, 0, randomOffset);
+export const generateClusterCircle = (settings) => {
+    return generateClusterEllipse({...settings, radiusX: settings.radius, radiusY: settings.radius});
 }
 
-export const generateClusterArc = (numberOfPoints, h, k, rOuter, rInner, angle=0, direction="greater", randomOffset=0) => {
+export const generateClusterArc = (settings) => {
+
+    let { numberOfPoints, centerX, centerY, radiusOuter, radiusInner, angle = 0, direction = "greater", randomOffset = 0, chanceOfAddingOutsidePoint = 50 } = settings;
 
     // return nothing if the inner radius is too big
-    if (rInner >= rOuter)
+    if (radiusInner >= radiusOuter)
         { return []; }
 
     let pointsSoFar = 0;
@@ -58,42 +59,35 @@ export const generateClusterArc = (numberOfPoints, h, k, rOuter, rInner, angle=0
                 // convert angle in degrees to a ratio
                 slope = Math.tan(angle / 180 * Math.PI);
             }
-
-        console.log("slope is", slope)
     }
-
-    // 1/n chance of adding a point outside the shape
-    let chanceOfAddingOutsidePoint = 50;
 
     while (pointsSoFar < numberOfPoints)
         {
             // determine offset from the origin of the circle
-            let randomPointX = h + Math.floor(Math.random() * rOuter) * oneOrNegativeOne();
-            let randomPointY = k + Math.floor(Math.random() * rOuter) * oneOrNegativeOne();
+            let randomPointX = centerX + Math.floor(Math.random() * radiusOuter) * oneOrNegativeOne();
+            let randomPointY = centerY + Math.floor(Math.random() * radiusOuter) * oneOrNegativeOne();
 
             // add point if it lies between the two circles, or add the point anyway with a 1/n chance
             if (
-                    ((randomPointX - h) ** 2 / (rOuter ** 2) + (randomPointY - k) ** 2 / (rOuter ** 2) <= 1
-                        && (randomPointX - h) ** 2 / (rInner ** 2) + (randomPointY - k) ** 2 / (rInner ** 2) >= 1)
+                    ((randomPointX - centerX) ** 2 / (radiusOuter ** 2) + (randomPointY - centerY) ** 2 / (radiusOuter ** 2) <= 1
+                        && (randomPointX - centerX) ** 2 / (radiusInner ** 2) + (randomPointY - centerY) ** 2 / (radiusInner ** 2) >= 1)
 
 
                     // if slope is specified, ensure that the point is either above/below the diagonal line specified or left/right of the vertical line
                     && (!slope
                         || (slope &&
                                 (
-                                    (slope !== "vertical" && direction === "greater" && randomPointY - k >= slope * (randomPointX - h))
+                                    (slope !== "vertical" && direction === "greater" && randomPointY - centerY >= slope * (randomPointX - centerX))
                                     // (console.log(slope, direction) && slope !== "vertical" && direction === "less" && console.log("yay"))
-                                    || (slope !== "vertical" && direction === "less" && randomPointY - k <= slope * (randomPointX - h))
+                                    || (slope !== "vertical" && direction === "less" && randomPointY - centerY <= slope * (randomPointX - centerX))
                                     // vertical slope: keep x-values that are either greater than or less than h
-                                    || (slope === "vertical" && direction === "less" && randomPointX <= h)
-                                    || (slope === "vertical" && direction === "greater" && randomPointX >= h)
+                                    || (slope === "vertical" && direction === "less" && randomPointX <= centerX)
+                                    || (slope === "vertical" && direction === "greater" && randomPointX >= centerX)
                                 )
                             )
                         )
                     )
                 {
-                    console.log(randomPointY - k <= slope * (randomPointX - h))
-
                     // move point randomly by specified offset
                     randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
                     randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
