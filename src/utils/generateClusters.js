@@ -28,14 +28,16 @@ export const generateClusterEllipse = (settings) => {
                     randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
                     randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
 
-                    points.push([randomPointX, randomPointY]);
+                    points.push({x: randomPointX, y: randomPointY});
                     pointsSoFar += 1;
                 }
         }
 
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
-    return points.filter((point, index) => points.indexOf(point) === index);
+    points = points.filter((point, index) => points.indexOf(point) === index);
+
+    return points;
 
 }
 
@@ -99,7 +101,7 @@ export const generateClusterArc = (settings) => {
                     randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
                     randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
 
-                    points.push([randomPointX, randomPointY]);
+                    points.push({x: randomPointX, y: randomPointY});
                     pointsSoFar += 1;
                 }
         }
@@ -129,7 +131,7 @@ export const generateNoise = (settings) => {
             // ensure that even after moving point by offset, the new coordinates are still within bounds
             if (randomPointX >= minX && randomPointX <= maxX && randomPointY >= minY && randomPointY <= maxY)
             {
-                points.push([randomPointX, randomPointY]);
+                points.push({x: randomPointX, y: randomPointY});
                 pointsSoFar += 1;
             }
         }

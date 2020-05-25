@@ -80,27 +80,27 @@ const Home = () => {
         datasets: [
             {
                 pointBackgroundColor: "#009966",
-                data: cluster1.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster1
             },
             {
                 pointBackgroundColor: "#0099FF",
-                data: cluster2.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster2
             },
             {
                 pointBackgroundColor: "#FF9966",
-                data: cluster3.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster3
             },
             {
                 pointBackgroundColor: "#9933FF",
-                data: cluster4.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster4
             },
             {
                 pointBackgroundColor: "#CC3300",
-                data: cluster5.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster5
             },
             {
                 pointBackgroundColor: "#333333",
-                data: cluster6.map((point, id) => { return {"x": point[0], "y": point[1]}})
+                data: cluster6
             }
 
         ]
