@@ -11,7 +11,7 @@ const Home = () => {
         centerY: 20,
         radiusX: 20,
         radiusY: 7,
-        rotationAngle: 0,
+        rotationAngleDegrees: 0,
         randomOffset: 0.1,
         percentChanceOfAddingOutsidePoint: 10
     };
@@ -22,7 +22,7 @@ const Home = () => {
         centerY: 70,
         radiusX: 12,
         radiusY: 20,
-        rotationAngle: 0,
+        rotationAngleDegrees: 0,
         randomOffset: 0.1,
         percentChanceOfAddingOutsidePoint: 10
     };
@@ -42,7 +42,7 @@ const Home = () => {
         centerY: 50,
         radiusOuter: 20,
         radiusInner: 15,
-        angle: 30,
+        angleDegrees: 30,
         direction: "less",
         randomOffset: 0.1,
         percentChanceOfAddingOutsidePoint: 10
@@ -54,7 +54,7 @@ const Home = () => {
         centerY: 50,
         radiusOuter: 20,
         radiusInner: 15,
-        angle: 30,
+        angleDegrees: 30,
         direction: "greater",
         randomOffset: 0.1,
         percentChanceOfAddingOutsidePoint: 10

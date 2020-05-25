@@ -1,6 +1,6 @@
 export const generateClusterEllipse = (settings) => {
 
-    let { numberOfPoints, centerX, centerY, radiusX, radiusY, rotationAngle = 0, randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
+    let { numberOfPoints, centerX, centerY, radiusX, radiusY, rotationAngleDegrees = 0, randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
 
     let pointsSoFar = 0;
     let points = [];
@@ -38,7 +38,7 @@ export const generateClusterCircle = (settings) => {
 
 export const generateClusterArc = (settings) => {
 
-    let { numberOfPoints, centerX, centerY, radiusOuter, radiusInner, angle = 0, direction = "greater", randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
+    let { numberOfPoints, centerX, centerY, radiusOuter, radiusInner, angleDegrees = 0, direction = "greater", randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
 
     // return nothing if the inner radius is too big
     if (radiusInner >= radiusOuter)
@@ -46,18 +46,18 @@ export const generateClusterArc = (settings) => {
 
     let pointsSoFar = 0;
     let points = [];
-    let slope = null || angle;
+    let slope = null || angleDegrees;
 
     // determine equation of line to check
     if (slope) {
 
-        if (angle % 180 === 90)
+        if (angleDegrees % 180 === 90)
             { slope = "vertical" }
         
         else
             {
                 // convert angle in degrees to a ratio
-                slope = Math.tan(angle / 180 * Math.PI);
+                slope = Math.tan(angleDegrees / 180 * Math.PI);
             }
     }
 
