@@ -7,8 +7,8 @@ export const generateClusterEllipse = (settings) => {
     
     let boundingBox = {
         minX: null,
-        minY: null,
         maxX: null,
+        minY: null,
         maxY: null
     }
 
@@ -54,7 +54,7 @@ export const generateClusterEllipse = (settings) => {
         }
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
-    points = points.filter((point, index) => points.indexOf(point) === index);
+    // points = points.filter((point, index) => points.indexOf(point) === index);
 
     return { points, boundingBox };
 
@@ -77,8 +77,8 @@ export const generateClusterArc = (settings) => {
 
     let boundingBox = {
         minX: null,
-        minY: null,
         maxX: null,
+        minY: null,
         maxY: null
     }
 
@@ -148,7 +148,7 @@ export const generateClusterArc = (settings) => {
 
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
-    points = points.filter((point, index) => points.indexOf(point) === index);
+    // points = points.filter((point, index) => points.indexOf(point) === index);
 
     return { points, boundingBox };
 
@@ -163,8 +163,8 @@ export const generateNoise = (settings) => {
     
     let boundingBox = {
         minX: null,
-        minY: null,
         maxX: null,
+        minY: null,
         maxY: null
     }
 
@@ -198,7 +198,7 @@ export const generateNoise = (settings) => {
             }
         }
 
-    points = points.filter((point, index) => points.indexOf(point) === index);
+    // points = points.filter((point, index) => points.indexOf(point) === index);
 
     return { points, boundingBox };
 
