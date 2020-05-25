@@ -4,6 +4,13 @@ export const generateClusterEllipse = (settings) => {
 
     let pointsSoFar = 0;
     let points = [];
+    
+    let boundingBox = {
+        minX: null,
+        minY: null,
+        maxX: null,
+        maxY: null
+    }
 
     let rotationAngleRadians = Math.tan(rotationAngleDegrees / 180 * Math.PI);
 
@@ -30,14 +37,26 @@ export const generateClusterEllipse = (settings) => {
 
                     points.push({x: randomPointX, y: randomPointY});
                     pointsSoFar += 1;
+
+                    // update bounding box
+                    if (!boundingBox.minX || randomPointX < boundingBox.minX)
+                        { boundingBox.minX = randomPointX}
+                    
+                    if (!boundingBox.maxX || randomPointX > boundingBox.maxX)
+                        { boundingBox.maxX = randomPointX}
+
+                    if (!boundingBox.minY || randomPointY < boundingBox.minY)
+                        { boundingBox.minY = randomPointY}
+                    
+                    if (!boundingBox.maxY || randomPointY > boundingBox.maxY)
+                        { boundingBox.maxY = randomPointY}
                 }
         }
-
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
     points = points.filter((point, index) => points.indexOf(point) === index);
 
-    return points;
+    return { points, boundingBox };
 
 }
 
@@ -55,6 +74,14 @@ export const generateClusterArc = (settings) => {
 
     let pointsSoFar = 0;
     let points = [];
+
+    let boundingBox = {
+        minX: null,
+        minY: null,
+        maxX: null,
+        maxY: null
+    }
+
     let slope = null || angleDegrees;
 
     // determine equation of line to check
@@ -103,12 +130,27 @@ export const generateClusterArc = (settings) => {
 
                     points.push({x: randomPointX, y: randomPointY});
                     pointsSoFar += 1;
+
+                    // update bounding box
+                    if (!boundingBox.minX || randomPointX < boundingBox.minX)
+                        { boundingBox.minX = randomPointX}
+                    
+                    if (!boundingBox.maxX || randomPointX > boundingBox.maxX)
+                        { boundingBox.maxX = randomPointX}
+
+                    if (!boundingBox.minY || randomPointY < boundingBox.minY)
+                        { boundingBox.minY = randomPointY}
+                    
+                    if (!boundingBox.maxY || randomPointY > boundingBox.maxY)
+                        { boundingBox.maxY = randomPointY}
                 }
         }
 
 
     // remove duplicate points. Will cause resulting array to contain fewer than numberOfPoints.
-    return points.filter((point, index) => points.indexOf(point) === index);
+    points = points.filter((point, index) => points.indexOf(point) === index);
+
+    return { points, boundingBox };
 
 }
 
@@ -118,6 +160,13 @@ export const generateNoise = (settings) => {
 
     let pointsSoFar = 0;
     let points = [];
+    
+    let boundingBox = {
+        minX: null,
+        minY: null,
+        maxX: null,
+        maxY: null
+    }
 
     while (pointsSoFar < numberOfPoints)
         {
@@ -133,10 +182,25 @@ export const generateNoise = (settings) => {
             {
                 points.push({x: randomPointX, y: randomPointY});
                 pointsSoFar += 1;
+
+                // update bounding box
+                if (!boundingBox.minX || randomPointX < boundingBox.minX)
+                    { boundingBox.minX = randomPointX}
+                
+                if (!boundingBox.maxX || randomPointX > boundingBox.maxX)
+                    { boundingBox.maxX = randomPointX}
+
+                if (!boundingBox.minY || randomPointY < boundingBox.minY)
+                    { boundingBox.minY = randomPointY}
+                
+                if (!boundingBox.maxY || randomPointY > boundingBox.maxY)
+                    { boundingBox.maxY = randomPointY}
             }
         }
 
-    return points;
+    points = points.filter((point, index) => points.indexOf(point) === index);
+
+    return { points, boundingBox };
 
 }
 

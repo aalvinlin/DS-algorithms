@@ -80,27 +80,27 @@ const Home = () => {
         datasets: [
             {
                 pointBackgroundColor: "#009966",
-                data: cluster1
+                data: cluster1.points
             },
             {
                 pointBackgroundColor: "#0099FF",
-                data: cluster2
+                data: cluster2.points
             },
             {
                 pointBackgroundColor: "#FF9966",
-                data: cluster3
+                data: cluster3.points
             },
             {
                 pointBackgroundColor: "#9933FF",
-                data: cluster4
+                data: cluster4.points
             },
             {
                 pointBackgroundColor: "#CC3300",
-                data: cluster5
+                data: cluster5.points
             },
             {
                 pointBackgroundColor: "#333333",
-                data: cluster6
+                data: cluster6.points
             }
 
         ]
