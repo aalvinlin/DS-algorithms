@@ -119,8 +119,12 @@ export const generateNoise = (settings) => {
             randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
             randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();            
             
-            points.push([randomPointX, randomPointY]);
-            pointsSoFar += 1;
+            // ensure that even after moving point by offset, the new coordinates are still within bounds
+            if (randomPointX >= minX && randomPointX <= maxX && randomPointY >= minY && randomPointY <= maxY)
+            {
+                points.push([randomPointX, randomPointY]);
+                pointsSoFar += 1;
+            }
         }
 
     return points;

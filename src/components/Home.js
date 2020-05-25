@@ -7,8 +7,8 @@ const Home = () => {
 
     let ellipse1 = {
         numberOfPoints: 100,
-        centerX: 10,
-        centerY: 10,
+        centerX: 60,
+        centerY: 20,
         radiusX: 20,
         radiusY: 7,
         rotationAngle: 0,
