@@ -1,15 +1,18 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { set1 } from "../data/data";
+import { set1, set2 } from "../data/data";
 import { generateClusterEllipse, generateClusterCircle, generateClusterArc, combineAndAddNoise } from "../utils/generateClusters";
 
 const Home = () => {
 
+    let data = set2;
+
     let scatterPlot1 = combineAndAddNoise(
-            [generateClusterEllipse(set1.ellipse1), generateClusterEllipse(set1.ellipse2), generateClusterCircle(set1.circle1), generateClusterArc(set1.arc1), generateClusterArc(set1.arc2)],
+            // [generateClusterEllipse(data.ellipse1), generateClusterEllipse(data.ellipse2), generateClusterCircle(data.circle1), generateClusterArc(data.arc1), generateClusterArc(data.arc2)],
+            [generateClusterCircle(data.circle1), generateClusterCircle(data.circle2), generateClusterCircle(data.circle3)],
             true,
-            set1.noiseSettings);
+            data.noiseSettings);
 
     let chartJSData = {
         datasets: [
