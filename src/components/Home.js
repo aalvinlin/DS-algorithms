@@ -102,7 +102,10 @@ const Home = () => {
 
     let noisePoints = generateNoise(noiseSettings);
 
+    // add noise points and remove duplicates
     combinedPoints = combinedPoints.concat(noisePoints.points);
+    combinedPoints = combinedPoints.filter((point, index) => combinedPoints.indexOf(point) === index);
+
     shuffle(combinedPoints);
 
     let chartJSData = {
