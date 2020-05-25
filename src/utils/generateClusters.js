@@ -1,6 +1,6 @@
 export const generateClusterEllipse = (settings) => {
 
-    let { numberOfPoints, centerX, centerY, radiusX, radiusY, rotationAngle = 0, randomOffset = 0, chanceOfAddingOutsidePoint = 50 } = settings;
+    let { numberOfPoints, centerX, centerY, radiusX, radiusY, rotationAngle = 0, randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
 
     let pointsSoFar = 0;
     let points = [];
@@ -11,10 +11,10 @@ export const generateClusterEllipse = (settings) => {
             let randomPointX = centerX + Math.floor(Math.random() * radiusX) * oneOrNegativeOne();
             let randomPointY = centerY + Math.floor(Math.random() * radiusY) * oneOrNegativeOne();
 
-            // add point if it lies in the ellipse, or add the point anyway with a 1/n chance
+            // add point if it lies in the ellipse, or add the point anyway with an n% chance
             if (
                     (randomPointX - centerX) ** 2 / (radiusX ** 2) + (randomPointY - centerY) ** 2 / (radiusY ** 2) <= 1
-                    || (!Math.floor(Math.random() * chanceOfAddingOutsidePoint))
+                    || (!Math.floor(Math.random() * 100 / percentChanceOfAddingOutsidePoint))
                     )
                 {
                     // move point randomly by specified offset
@@ -38,7 +38,7 @@ export const generateClusterCircle = (settings) => {
 
 export const generateClusterArc = (settings) => {
 
-    let { numberOfPoints, centerX, centerY, radiusOuter, radiusInner, angle = 0, direction = "greater", randomOffset = 0, chanceOfAddingOutsidePoint = 50 } = settings;
+    let { numberOfPoints, centerX, centerY, radiusOuter, radiusInner, angle = 0, direction = "greater", randomOffset = 0, percentChanceOfAddingOutsidePoint = 10 } = settings;
 
     // return nothing if the inner radius is too big
     if (radiusInner >= radiusOuter)
@@ -67,11 +67,11 @@ export const generateClusterArc = (settings) => {
             let randomPointX = centerX + Math.floor(Math.random() * radiusOuter) * oneOrNegativeOne();
             let randomPointY = centerY + Math.floor(Math.random() * radiusOuter) * oneOrNegativeOne();
 
-            // add point if it lies between the two circles, or add the point anyway with a 1/n chance
+            // add point if it lies between the two circles
+            // for now, do not allow adding points anyway with an n% chance (obscures arc shape)
             if (
                     ((randomPointX - centerX) ** 2 / (radiusOuter ** 2) + (randomPointY - centerY) ** 2 / (radiusOuter ** 2) <= 1
                         && (randomPointX - centerX) ** 2 / (radiusInner ** 2) + (randomPointY - centerY) ** 2 / (radiusInner ** 2) >= 1)
-
 
                     // if slope is specified, ensure that the point is either above/below the diagonal line specified or left/right of the vertical line
                     && (!slope

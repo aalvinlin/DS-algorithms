@@ -13,7 +13,7 @@ const Home = () => {
         radiusY: 7,
         rotationAngle: 0,
         randomOffset: 0.1,
-        chanceOfAddingOutsidePoint: 50
+        percentChanceOfAddingOutsidePoint: 10
     };
 
     let ellipse2 = {
@@ -24,7 +24,7 @@ const Home = () => {
         radiusY: 20,
         rotationAngle: 0,
         randomOffset: 0.1,
-        chanceOfAddingOutsidePoint: 50
+        percentChanceOfAddingOutsidePoint: 10
     };
 
     let circle1 = {
@@ -33,7 +33,7 @@ const Home = () => {
         centerY: 90,
         radius: 10,
         randomOffset: 0.1,
-        chanceOfAddingOutsidePoint: 50
+        percentChanceOfAddingOutsidePoint: 10
     };
 
     let arc1 = {
@@ -45,7 +45,7 @@ const Home = () => {
         angle: 30,
         direction: "less",
         randomOffset: 0.1,
-        chanceOfAddingOutsidePoint: 50
+        percentChanceOfAddingOutsidePoint: 10
     };
 
     let arc2 = {
@@ -57,7 +57,7 @@ const Home = () => {
         angle: 30,
         direction: "greater",
         randomOffset: 0.1,
-        chanceOfAddingOutsidePoint: 50
+        percentChanceOfAddingOutsidePoint: 10
     };
 
     let cluster1 = generateClusterEllipse(ellipse1);
