@@ -1,13 +1,14 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { generateClusterEllipse, generateClusterCircle } from "../utils/generateClusters";
+import { generateClusterEllipse, generateClusterCircle, generateClusterArc } from "../utils/generateClusters";
 
 const Home = () => {
 
     let cluster1 = generateClusterEllipse(100, 10, 10, 20, 7, 0, 0.1);
     let cluster2 = generateClusterEllipse(100, 80, 70, 12, 20, 0, 0.1);
     let cluster3 = generateClusterCircle(100, 30, 90, 10, 0.1);
+    let cluster4 = generateClusterArc(100, 20, 50, 20, 15, 0, "less", 0.1);
 
     let chartJSData = {
         datasets: [
@@ -22,7 +23,12 @@ const Home = () => {
             {
                 pointBackgroundColor: "#FF9966",
                 data: cluster3.map((point, id) => { return {"x": point[0], "y": point[1]}})
+            },
+            {
+                pointBackgroundColor: "#9933FF",
+                data: cluster4.map((point, id) => { return {"x": point[0], "y": point[1]}})
             }
+
         ]
     };
 
