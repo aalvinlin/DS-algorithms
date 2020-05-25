@@ -21,7 +21,7 @@ const Dbscan = () => {
         return {
             label: "Cluster #" + index,
             pointBackgroundColor: colors[index],
-            pointRadius: 10,
+            pointRadius: 5,
             data: cluster
         }
     })
@@ -29,11 +29,30 @@ const Dbscan = () => {
     console.log(datasets)
 
     let chartJSData = { datasets };
+    let options = {
+            scales: {
+                xAxes: [{
+                    beginAtZero: true,
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                }],
+                yAxes: [{
+                    beginAtZero: true,
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                    
+                }]
+            }
+        }
 
     return (
         <>
             <h1>DBSCAN</h1>
-            <Scatter data={chartJSData} />
+            <Scatter data={chartJSData} options={options} />
         </>
     )
 
