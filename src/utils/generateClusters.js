@@ -219,7 +219,62 @@ export const shuffle = (array) => {
         }
 }
 
+// combine several clusters and add noise
+export const combineAndAddNoise = (clusters, addNoise, noiseSettings) => {
+    
+    // get the bounding box of the entire set of points
+    let boundingBoxOverall = {
+        minX: null,
+        maxX: null,
+        minY: null,
+        maxY: null
+    }
+
+    let combinedPoints = [];
+
+    clusters.forEach(cluster => {
+
+        // update bounding box
+        if (!boundingBoxOverall.minX || cluster.boundingBox.minX < boundingBoxOverall.minX)
+        { boundingBoxOverall.minX = cluster.boundingBox.minX}
+        
+        if (!boundingBoxOverall.maxX || cluster.boundingBox.maxX > boundingBoxOverall.maxX)
+            { boundingBoxOverall.maxX = cluster.boundingBox.maxX}
+
+        if (!boundingBoxOverall.minY || cluster.boundingBox.minY < boundingBoxOverall.minY)
+            { boundingBoxOverall.minY = cluster.boundingBox.minY}
+        
+        if (!boundingBoxOverall.maxY || cluster.boundingBox.maxY > boundingBoxOverall.maxY)
+            { boundingBoxOverall.maxY = cluster.boundingBox.maxY}
+
+        combinedPoints = combinedPoints.concat(cluster.points);
+    })
+
+    // generate noise
+    if (addNoise)
+        {
+            noiseSettings = { ...noiseSettings,
+                minX: boundingBoxOverall.minX,
+                maxX: boundingBoxOverall.maxX + noiseSettings.additionalX,
+                minY: boundingBoxOverall.minY,
+                maxY: boundingBoxOverall.maxY + noiseSettings.additionalY,
+            }
+
+            let noisePoints = generateNoise(noiseSettings);
+
+            // add noise points and remove duplicates
+            combinedPoints = combinedPoints.concat(noisePoints.points);
+            combinedPoints = combinedPoints.filter((point, index) => combinedPoints.indexOf(point) === index);
+        }
+
+    shuffle(combinedPoints);
+
+    return combinedPoints;
+
+}
+
 // pick 1 or -1 with a 50% chance
 const oneOrNegativeOne = () => {
     return Math.floor(Math.random() * 2) ? -1 : 1;
 }
+
