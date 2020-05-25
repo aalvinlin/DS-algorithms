@@ -12,20 +12,23 @@ const Dbscan = () => {
 
     // sort by increasing x-coordinates
     // if x-coordinates are the same, sort by increasing y-coordinates
-    let separatedClusters = useDbscan(scatterPlot);
+    let separatedClusters = useDbscan(scatterPlot, 5, 5);
 
-    console.log(scatterPlot)
+    let colors = ["#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#CCCCCC", "#996600"];
 
-    let chartJSData = {
-        datasets: [
-            {
-                label: "Scatter Plot #1",
-                pointBackgroundColor: "#333333",
-                data: scatterPlot
+    // format clusters for chartJS to display
+    let datasets = separatedClusters.map((cluster, index) => {
+        return {
+            label: "Cluster #" + index,
+            pointBackgroundColor: colors[index],
+            pointRadius: 10,
+            data: cluster
+        }
+    })
 
-            }
-        ]
-    };
+    console.log(datasets)
+
+    let chartJSData = { datasets };
 
     return (
         <>
