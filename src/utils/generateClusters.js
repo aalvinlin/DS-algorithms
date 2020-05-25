@@ -219,8 +219,11 @@ export const shuffle = (array) => {
         }
 }
 
-// combine several clusters and add noise
-export const combineAndAddNoise = (clusters, addNoise, noiseSettings) => {
+// create clusters from input settings
+// returns an array of objects ({x: ..., y: ...}) representing coordinate points
+export const createClusters = (clustersData) => {
+
+    let { clusters, noiseSettings } = clustersData;
     
     // get the bounding box of the entire set of points
     let boundingBoxOverall = {
@@ -232,7 +235,19 @@ export const combineAndAddNoise = (clusters, addNoise, noiseSettings) => {
 
     let combinedPoints = [];
 
-    clusters.forEach(cluster => {
+    clusters.forEach(clusterSettings => {
+
+        let cluster = null;
+
+        // generate the specified type of cluster
+        if (clusterSettings.type === "ellipse")
+            { cluster = generateClusterEllipse(clusterSettings); }
+        
+        else if (clusterSettings.type === "circle")
+            { cluster = generateClusterCircle(clusterSettings); }
+        
+        else if (clusterSettings.type === "arc")
+            { cluster = generateClusterArc(clusterSettings); }
 
         // update bounding box
         if (!boundingBoxOverall.minX || cluster.boundingBox.minX < boundingBoxOverall.minX)
@@ -251,7 +266,7 @@ export const combineAndAddNoise = (clusters, addNoise, noiseSettings) => {
     })
 
     // generate noise
-    if (addNoise)
+    if (noiseSettings && noiseSettings.numberOfPoints > 0)
         {
             noiseSettings = { ...noiseSettings,
                 minX: boundingBoxOverall.minX,
