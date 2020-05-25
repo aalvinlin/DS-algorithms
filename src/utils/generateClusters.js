@@ -114,7 +114,6 @@ export const generateClusterArc = (settings) => {
                         || (slope &&
                                 (
                                     (slope !== "vertical" && direction === "greater" && randomPointY - centerY >= slope * (randomPointX - centerX))
-                                    // (console.log(slope, direction) && slope !== "vertical" && direction === "less" && console.log("yay"))
                                     || (slope !== "vertical" && direction === "less" && randomPointY - centerY <= slope * (randomPointX - centerX))
                                     // vertical slope: keep x-values that are either greater than or less than h
                                     || (slope === "vertical" && direction === "less" && randomPointX <= centerX)
@@ -202,6 +201,22 @@ export const generateNoise = (settings) => {
 
     return { points, boundingBox };
 
+}
+
+// shuffles an array with the Fisher-Yates algorithm
+export const shuffle = (array) => {
+
+    let lastIndex = array.length - 1;
+
+    for (let currentIndex = lastIndex; currentIndex > 0; currentIndex--)
+        {
+            // pick a number from 0 to lastIndex
+            let indexChosen = Math.floor(Math.random() * lastIndex);
+            let itemToSwap = array[indexChosen];
+
+            array[indexChosen] = array[lastIndex];
+            array[lastIndex] = itemToSwap;
+        }
 }
 
 // pick 1 or -1 with a 50% chance

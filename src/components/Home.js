@@ -1,7 +1,7 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { generateClusterEllipse, generateClusterCircle, generateClusterArc, generateNoise } from "../utils/generateClusters";
+import { generateClusterEllipse, generateClusterCircle, generateClusterArc, generateNoise, shuffle } from "../utils/generateClusters";
 
 const Home = () => {
 
@@ -103,8 +103,7 @@ const Home = () => {
     let noisePoints = generateNoise(noiseSettings);
 
     combinedPoints = combinedPoints.concat(noisePoints.points);
-
-    console.log(combinedPoints)
+    shuffle(combinedPoints);
 
     let chartJSData = {
         datasets: [
