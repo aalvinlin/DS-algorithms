@@ -5,15 +5,22 @@ export const generateClusterEllipse = (settings) => {
     let pointsSoFar = 0;
     let points = [];
 
+    let rotationAngleRadians = Math.tan(rotationAngleDegrees / 180 * Math.PI);
+
+    // for rotated ellipses, bounding box will be the larger of the two axes
+    let largerAxis = radiusX > radiusY ? radiusX : radiusY;
+
     while (pointsSoFar < numberOfPoints)
         {
             // determine offset from the origin of the ellipse
-            let randomPointX = centerX + Math.floor(Math.random() * radiusX) * oneOrNegativeOne();
-            let randomPointY = centerY + Math.floor(Math.random() * radiusY) * oneOrNegativeOne();
+            let randomPointX = centerX + Math.floor(Math.random() * largerAxis) * oneOrNegativeOne();
+            let randomPointY = centerY + Math.floor(Math.random() * largerAxis) * oneOrNegativeOne();
 
             // add point if it lies in the ellipse, or add the point anyway with an n% chance
             if (
-                    (randomPointX - centerX) ** 2 / (radiusX ** 2) + (randomPointY - centerY) ** 2 / (radiusY ** 2) <= 1
+                    ((randomPointX - centerX) * Math.cos(rotationAngleRadians) + ((randomPointY - centerY)) * Math.sin(rotationAngleRadians)) ** 2 / (radiusX ** 2)
+                    + (-(randomPointX - centerX) * Math.sin(rotationAngleRadians) + ((randomPointY - centerY)) * Math.cos(rotationAngleRadians)) ** 2 / (radiusY ** 2)
+                        <= 1
                     || (!Math.floor(Math.random() * 100 / percentChanceOfAddingOutsidePoint))
                     )
                 {

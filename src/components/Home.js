@@ -6,14 +6,14 @@ import { generateClusterEllipse, generateClusterCircle, generateClusterArc, gene
 const Home = () => {
 
     let ellipse1 = {
-        numberOfPoints: 100,
+        numberOfPoints: 200,
         centerX: 60,
         centerY: 20,
         radiusX: 20,
         radiusY: 7,
-        rotationAngleDegrees: 0,
+        rotationAngleDegrees: 30,
         randomOffset: 0.1,
-        percentChanceOfAddingOutsidePoint: 10
+        percentChanceOfAddingOutsidePoint: 5
     };
 
     let ellipse2 = {
