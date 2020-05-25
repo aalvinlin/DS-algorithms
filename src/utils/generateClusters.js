@@ -103,6 +103,30 @@ export const generateClusterArc = (settings) => {
 
 }
 
+export const generateNoise = (settings) => {
+
+    let { numberOfPoints, minX, maxX, minY, maxY, randomOffset } = settings;
+
+    let pointsSoFar = 0;
+    let points = [];
+
+    while (pointsSoFar < numberOfPoints)
+        {
+            let randomPointX = minX + Math.floor(Math.random() * (maxX - minX));
+            let randomPointY = minY + Math.floor(Math.random() * (maxY - minY));
+
+            // move point randomly by specified offset
+            randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
+            randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();            
+            
+            points.push([randomPointX, randomPointY]);
+            pointsSoFar += 1;
+        }
+
+    return points;
+
+}
+
 // pick 1 or -1 with a 50% chance
 const oneOrNegativeOne = () => {
     return Math.floor(Math.random() * 2) ? -1 : 1;

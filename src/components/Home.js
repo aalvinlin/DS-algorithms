@@ -1,7 +1,7 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { generateClusterEllipse, generateClusterCircle, generateClusterArc } from "../utils/generateClusters";
+import { generateClusterEllipse, generateClusterCircle, generateClusterArc, generateNoise } from "../utils/generateClusters";
 
 const Home = () => {
 
@@ -60,11 +60,21 @@ const Home = () => {
         percentChanceOfAddingOutsidePoint: 10
     };
 
+    let noise1 = {
+        numberOfPoints: 100,
+        minX: 0,
+        minY: 0,
+        maxX: 100,
+        maxY: 100,
+        randomOffset: 0.1
+    }
+
     let cluster1 = generateClusterEllipse(ellipse1);
     let cluster2 = generateClusterEllipse(ellipse2);
     let cluster3 = generateClusterCircle(circle1);
     let cluster4 = generateClusterArc(arc1);
     let cluster5 = generateClusterArc(arc2);
+    let cluster6 = generateNoise(noise1);
 
     let chartJSData = {
         datasets: [
@@ -87,6 +97,10 @@ const Home = () => {
             {
                 pointBackgroundColor: "#CC3300",
                 data: cluster5.map((point, id) => { return {"x": point[0], "y": point[1]}})
+            },
+            {
+                pointBackgroundColor: "#333333",
+                data: cluster6.map((point, id) => { return {"x": point[0], "y": point[1]}})
             }
 
         ]
