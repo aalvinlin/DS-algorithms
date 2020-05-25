@@ -5,9 +5,9 @@ import { generateClusterEllipse, generateClusterCircle } from "../utils/generate
 
 const Home = () => {
 
-    let cluster1 = generateClusterEllipse(100, 10, 10, 20, 7, 0, 1);
-    let cluster2 = generateClusterEllipse(100, 80, 70, 12, 20, 0, 0);
-    let cluster3 = generateClusterCircle(100, 30, 90, 10, 0);
+    let cluster1 = generateClusterEllipse(100, 10, 10, 20, 7, 0, 0.1);
+    let cluster2 = generateClusterEllipse(100, 80, 70, 12, 20, 0, 0.1);
+    let cluster3 = generateClusterCircle(100, 30, 90, 10, 0.1);
 
     let chartJSData = {
         datasets: [

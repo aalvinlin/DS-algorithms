@@ -3,14 +3,28 @@ export const generateClusterEllipse = (numberOfPoints, h, k, a, b, rotationAngle
     let pointsSoFar = 0;
     let points = [];
 
+    // 1/n chance of adding a point outside the shape
+    let chanceOfAddingOutsidePoint = 3;
+
     while (pointsSoFar < numberOfPoints)
         {
             // determine offset from the origin of the ellipse
-            let randomPointX = h + Math.floor(Math.random() * a) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
-            let randomPointY = k + Math.floor(Math.random() * b) * oneOrNegativeOne() + randomOffset * oneOrNegativeOne();
+            let randomPointX = h + Math.floor(Math.random() * a) * oneOrNegativeOne();
+            let randomPointY = k + Math.floor(Math.random() * b) * oneOrNegativeOne();
 
-            points.push([randomPointX, randomPointY]);
-            pointsSoFar += 1;
+            // add point if it lies in the ellipse, or add the point anyway with a 1/n chance
+            if (
+                    (randomPointX - h) ** 2 / (a ** 2) + (randomPointY - k) ** 2 / (b ** 2) <= 1
+                    || (!Math.floor(Math.random() * chanceOfAddingOutsidePoint))
+                    )
+                {
+                    // move point randomly by specified offset
+                    randomPointX += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
+                    randomPointY += Math.floor(Math.floor(1 / randomOffset / 2) * Math.random()) * randomOffset * oneOrNegativeOne();
+
+                    points.push([randomPointX, randomPointY]);
+                    pointsSoFar += 1;
+                }
         }
 
 
