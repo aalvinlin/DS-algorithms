@@ -15,13 +15,19 @@ const Dbscan = () => {
     // let separatedClusters = useDbscan(scatterPlot, 5, 5);
     let separatedClusters = useDbscan(simpleScatterPlot, 2.5, 2);
 
-    let colors = ["#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#CCCCCC", "#996600"];
+    console.log("#######################################");
+    console.log("the results are...", separatedClusters);
+    console.log("#######################################");
+
+    let colors = ["#CCCCCC", "#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#996600"];
 
     // format clusters for chartJS to display
     let datasets = separatedClusters.map((cluster, index) => {
         return {
-            label: "Cluster #" + index,
+            label: (index === 0)? "Outliers" : "Cluster " + index,
+            backgroundColor: colors[index],
             pointBackgroundColor: colors[index],
+            pointBorderRadius: 0,
             pointRadius: 5,
             data: cluster
         }
@@ -37,7 +43,7 @@ const Dbscan = () => {
                     ticks: {
                         min: 0,
                         // max: 50
-                        max: 10
+                        // max: 10
                     }
                 }],
                 yAxes: [{
@@ -45,7 +51,7 @@ const Dbscan = () => {
                     ticks: {
                         min: 0,
                         // max: 50
-                        max: 10
+                        // max: 10
                     }
                     
                 }]
