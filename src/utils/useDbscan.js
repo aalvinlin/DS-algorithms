@@ -18,24 +18,32 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             console.log("⭐ current point ID", currentPointID, currentPoint)
 
             let neighbors = new Set();
+            currentPoint.neighbors = neighbors;
             // let othersInXRange = [];
             
             let clustersNeighborsBelongTo = new Set();
 
             // keep checking until the next point is too far away
-            for (let i = currentPointID + 1; points[i] && Math.abs(currentPoint.x - points[i].x) <= epsilon; i++)
+            for (let currentNeighborID = currentPointID + 1; points[currentNeighborID] && Math.abs(currentPoint.x - points[currentNeighborID].x) <= epsilon; currentNeighborID++)
                 {
-                    console.log("    point #", i, "'s x-value is within range")
+                    console.log("    point #", currentNeighborID, "'s x-value is within range")
                     console.log("    all clusters so far:", knownClusters);
 
-                    let neighbor = points[i];
+                    let neighbor = points[currentNeighborID];
                     let distanceToNeighbor = Math.sqrt(Math.abs(currentPoint.x - neighbor.x) ** 2 + Math.abs(currentPoint.y - neighbor.y) ** 2);
 
                     if (distanceToNeighbor <= epsilon)
                         {
-                            // potential neighbor found
+                            // neighbor found
                             console.log("    ✔ neighbor to", currentPointID, "found!", neighbor)
                             neighbors.add(neighbor.pointID);
+
+                            // also add current point to neighboring point's list of neighbors
+                            // start a new set if the neighboring point does not have one yet
+                            if (!neighbor.neighbors)
+                                { neighbor.neighbors = new Set(); }
+                            
+                            neighbor.neighbors.add(currentPointID);
 
                             // keep track of all cluster IDs that neighbors belong to
                             // if more than one, will need to merge them all later
