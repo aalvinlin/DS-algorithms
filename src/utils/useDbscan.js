@@ -18,7 +18,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             console.log("⭐ current point ID", currentPointID, currentPoint)
 
             let neighbors = [];
-            let othersInXRange = [];
+            // let othersInXRange = [];
             
             let clustersNeighborsBelongTo = new Set();
 
@@ -26,6 +26,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             for (let i = currentPointID + 1; points[i] && Math.abs(currentPoint.x - points[i].x) <= epsilon; i++)
                 {
                     console.log("    point #", i, "'s x-value is within range")
+                    console.log("    all clusters so far:", knownClusters);
 
                     let neighbor = points[i];
                     let distanceToNeighbor = Math.sqrt(Math.abs(currentPoint.x - neighbor.x) ** 2 + Math.abs(currentPoint.y - neighbor.y) ** 2);
@@ -42,18 +43,21 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             if (neighbor.clusterID)
                                 { clustersNeighborsBelongTo.add(neighbor.clusterID); }
                         }
-                    else
-                        {
-                            othersInXRange.push(neighbor);
-                        }
+                    // else
+                    //     {
+                    //         othersInXRange.push(neighbor);
+                    //     }
                 }
             
+            // /*
+
             // add own clusterID if it exists
             if (currentPoint.clusterID)
                 { clustersNeighborsBelongTo.add(currentPoint.clusterID); }
 
             console.log("🏠 neighbors to point ID", currentPointID, neighbors);
-            console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo)
+            console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo);
+            console.log("    all clusters so far:", knownClusters);
 
 
             // determine which cluster to place the point in
@@ -69,12 +73,17 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                 {
                     let clusterIDToAddTo = null;
 
-                    // no known clusters or no points belong to a cluster yet: create a new cluster
-                    if (knownClusters.length === 0 || clustersNeighborsBelongTo.size === 0)
+                    // no known clusters yet: create a new cluster
+                    if (knownClusters.length === 0)
                         {
                             // start a new set at the next index for knownClusters
                             clusterIDToAddTo = knownClusters.length;
                             knownClusters[clusterIDToAddTo] = new Set();
+                        }
+                    // no points in radius belong to a cluster
+                    else if (clustersNeighborsBelongTo.size === 0)
+                        {
+
                         }
                     // one cluster found: update current point and its neighbors
                     else if (clustersNeighborsBelongTo.size === 1)
@@ -97,21 +106,23 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             console.log("multiple clusters found...size is", clustersNeighborsBelongTo.size)
                         }
 
-
-
-                    // update cluster ID for current point
-                    // also add current point to cluster
-                    currentPoint.clusterID = clusterIDToAddTo;
-                    knownClusters[clusterIDToAddTo].add(currentPointID);
-
-                    // update all neighbors with known cluster ID
-                    // also update cluster with each point
-                    for (let i = 0; i < neighbors.length; i++)
+                    // temp: only add to points if known cluster ID
+                    if (clusterIDToAddTo)
                         {
-                            neighbors[i].clusterID = clusterIDToAddTo;
-                            knownClusters[clusterIDToAddTo].add(neighbors[i].pointID);
+                            // update cluster ID for current point
+                            // also add current point to cluster
+                            currentPoint.clusterID = clusterIDToAddTo;
+                            knownClusters[clusterIDToAddTo].add(currentPointID);
+
+                            // update all neighbors with known cluster ID
+                            // also update cluster with each point
+                            for (let i = 0; i < neighbors.length; i++)
+                                {
+                                    neighbors[i].clusterID = clusterIDToAddTo;
+                                    knownClusters[clusterIDToAddTo].add(neighbors[i].pointID);
+                                }
                         }
-                    
+
                     // if the current point has at least requiredPointsInRadius points, it is a core point
                     if (neighbors.length + 1 >= requiredPointsInRadius)
                         {
@@ -135,16 +146,18 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                         }
                 }
 
-            let circleForScale = [];
+            // */
 
-            // create a ring of points surrounding the target point
-            for (let angle = 0; angle < 360; angle += 30)
-                {
-                    circleForScale.push({
-                        x: currentPoint.x + epsilon * Math.cos(angle / 180 * Math.PI),
-                        y: currentPoint.y + epsilon * Math.sin(angle / 180 * Math.PI)
-                    })
-                }
+            // let circleForScale = [];
+
+            // // create a ring of points surrounding the target point
+            // for (let angle = 0; angle < 360; angle += 30)
+            //     {
+            //         circleForScale.push({
+            //             x: currentPoint.x + epsilon * Math.cos(angle / 180 * Math.PI),
+            //             y: currentPoint.y + epsilon * Math.sin(angle / 180 * Math.PI)
+            //         })
+            //     }
 
                 
             console.log("current point status:", currentPoint);
@@ -159,6 +172,6 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
     console.log("clusters:", knownClusters);
 
     // return [Array.from(outliers)];
-    return [outliersFormatted, knownClusters, points];
+    return [outliersFormatted, knownClusters];
     // return [neighbors, points, circleForScale];
 }
