@@ -47,16 +47,12 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             // console.log("    ✔ neighbor to", currentPointID, "found!", neighbor)
                             neighbors.add(neighbor.pointID);
 
-                            console.log("    ❓ what's in neighbor", currentNeighborID, "?", neighbor);
-
                             // also add current point to neighboring point's list of neighbors
                             // start a new set if the neighboring point does not have one yet
                             if (!neighbor.neighbors)
-                                { neighbor.neighbors = new Set(); console.log('       new set')}
+                                { neighbor.neighbors = new Set(); }
                             
                             neighbor.neighbors.add(currentPointID);
-                            console.log("    ❗ neighbor", currentNeighborID, "should be updated...", neighbor.neighbors);
-                            console.log("-------------------------------------------");
 
                             // keep track of all cluster IDs that neighbors belong to
                             // if more than one, will need to merge them all later
@@ -64,13 +60,6 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             if (neighbor.clusterID)
                                 { clustersNeighborsBelongTo.add(neighbor.clusterID); }
                         }
-
-                        // console.log("neighbor should now include current point ID", neighbor.neighbors);
-
-                    // else
-                    //     {
-                    //         othersInXRange.push(neighbor);
-                    //     }
                 }
             
             // /*
@@ -79,10 +68,9 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             if (currentPoint.clusterID)
                 { clustersNeighborsBelongTo.add(currentPoint.clusterID); }
 
-            console.log("🏠 neighbors to point ID", currentPointID, neighbors);
+            // console.log("🏠 neighbors to point ID", currentPointID, neighbors);
             // console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo);
             // console.log("    all clusters so far:", knownClusters);
-
 
             // determine which cluster to place the point in
             // if the current point has no neighbors, it is an outlier
@@ -199,10 +187,10 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             //     }
 
                 
-            console.log("current point status:", currentPoint);
-            console.log("neighbors:", neighbors);
-            console.log("clusters:", knownClusters);
-            console.log("=========================================");
+            // console.log("current point status:", currentPoint);
+            // console.log("neighbors:", neighbors);
+            // console.log("clusters:", knownClusters);
+            // console.log("=========================================");
         }
 
     let outliersFormatted = Array.from(outliers);
