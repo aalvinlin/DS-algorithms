@@ -35,14 +35,14 @@ const Dbscan = () => {
                     beginAtZero: true,
                     ticks: {
                         min: 0,
-                        max: 100
+                        max: 50
                     }
                 }],
                 yAxes: [{
                     beginAtZero: true,
                     ticks: {
                         min: 0,
-                        max: 100
+                        max: 50
                     }
                     
                 }]
