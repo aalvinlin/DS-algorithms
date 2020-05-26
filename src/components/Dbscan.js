@@ -13,7 +13,7 @@ const Dbscan = () => {
     // sort by increasing x-coordinates
     // if x-coordinates are the same, sort by increasing y-coordinates
     // let separatedClusters = useDbscan(scatterPlot, 5, 5);
-    let separatedClusters = useDbscan(simpleScatterPlot, 3, 2);
+    let separatedClusters = useDbscan(simpleScatterPlot, 2.5, 2);
 
     let colors = ["#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#CCCCCC", "#996600"];
 

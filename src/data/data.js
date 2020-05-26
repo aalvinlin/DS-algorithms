@@ -137,7 +137,7 @@ export const set3 = {
     }
 }
 
-// use with a radius of 2 and an epsilon of 3
+// use with an epislon of 2 and a density of 3
 export const simpleScatterPlot = [
     {x: 1, y: 1},
     {x: 2, y: 5},
