@@ -1,7 +1,7 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { set1, set2, set3 } from "../data/data";
+import { set1, set2, set3, simpleScatterPlot } from "../data/data";
 
 import { createClusters } from "../utils/generateClusters";
 import { useDbscan } from "../utils/useDbscan";
@@ -12,7 +12,8 @@ const Dbscan = () => {
 
     // sort by increasing x-coordinates
     // if x-coordinates are the same, sort by increasing y-coordinates
-    let separatedClusters = useDbscan(scatterPlot, 5, 5);
+    // let separatedClusters = useDbscan(scatterPlot, 5, 5);
+    let separatedClusters = useDbscan(simpleScatterPlot, 3, 2);
 
     let colors = ["#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#CCCCCC", "#996600"];
 
@@ -35,14 +36,16 @@ const Dbscan = () => {
                     beginAtZero: true,
                     ticks: {
                         min: 0,
-                        max: 50
+                        // max: 50
+                        max: 10
                     }
                 }],
                 yAxes: [{
                     beginAtZero: true,
                     ticks: {
                         min: 0,
-                        max: 50
+                        // max: 50
+                        max: 10
                     }
                     
                 }]
