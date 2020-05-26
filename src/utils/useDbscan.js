@@ -17,8 +17,17 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
 
             console.log("⭐ current point ID", currentPointID, currentPoint)
 
-            let neighbors = new Set();
-            currentPoint.neighbors = neighbors;
+            // keep track of the neighbors to this point
+            let neighbors = null;
+
+            if (!currentPoint.neighbors)
+                {
+                    neighbors = new Set();
+                    currentPoint.neighbors = neighbors;
+                }
+            else
+                { neighbors = currentPoint.neighbors; }
+
             // let othersInXRange = [];
             
             let clustersNeighborsBelongTo = new Set();
@@ -26,7 +35,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             // keep checking until the next point is too far away
             for (let currentNeighborID = currentPointID + 1; points[currentNeighborID] && Math.abs(currentPoint.x - points[currentNeighborID].x) <= epsilon; currentNeighborID++)
                 {
-                    console.log("    point #", currentNeighborID, "'s x-value is within range")
+                    // console.log("    point #", currentNeighborID, "'s x-value is within range")
                     // console.log("    all clusters so far:", knownClusters);
 
                     let neighbor = points[currentNeighborID];
@@ -35,15 +44,19 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                     if (distanceToNeighbor <= epsilon)
                         {
                             // neighbor found
-                            console.log("    ✔ neighbor to", currentPointID, "found!", neighbor)
+                            // console.log("    ✔ neighbor to", currentPointID, "found!", neighbor)
                             neighbors.add(neighbor.pointID);
+
+                            console.log("    ❓ what's in neighbor", currentNeighborID, "?", neighbor);
 
                             // also add current point to neighboring point's list of neighbors
                             // start a new set if the neighboring point does not have one yet
                             if (!neighbor.neighbors)
-                                { neighbor.neighbors = new Set(); }
+                                { neighbor.neighbors = new Set(); console.log('       new set')}
                             
                             neighbor.neighbors.add(currentPointID);
+                            console.log("    ❗ neighbor", currentNeighborID, "should be updated...", neighbor.neighbors);
+                            console.log("-------------------------------------------");
 
                             // keep track of all cluster IDs that neighbors belong to
                             // if more than one, will need to merge them all later
@@ -51,6 +64,9 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             if (neighbor.clusterID)
                                 { clustersNeighborsBelongTo.add(neighbor.clusterID); }
                         }
+
+                        // console.log("neighbor should now include current point ID", neighbor.neighbors);
+
                     // else
                     //     {
                     //         othersInXRange.push(neighbor);
@@ -64,8 +80,8 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                 { clustersNeighborsBelongTo.add(currentPoint.clusterID); }
 
             console.log("🏠 neighbors to point ID", currentPointID, neighbors);
-            console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo);
-            console.log("    all clusters so far:", knownClusters);
+            // console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo);
+            // console.log("    all clusters so far:", knownClusters);
 
 
             // determine which cluster to place the point in
@@ -75,6 +91,8 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                     outliers.add(currentPoint); 
                     currentPoint.type = "outlier";
                 }
+
+            /*
 
             // point is either a boundary point or a core point
             else
@@ -103,15 +121,15 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                                     clusterIDToAddTo = value;
                                 }
 
-                            console.log("contents of the set with only 1 ID...", clustersNeighborsBelongTo.values())
+                            // console.log("contents of the set with only 1 ID...", clustersNeighborsBelongTo.values())
                         }
                     // multiple clusters found: merging will have to take place
                     // merge into the cluster with the smallest ID number
                     else
                         {
-                            console.log("contents of the set...multiple clusters?", clustersNeighborsBelongTo.values())
+                            // console.log("contents of the set...multiple clusters?", clustersNeighborsBelongTo.values())
 
-                            console.log("multiple clusters found...size is", clustersNeighborsBelongTo.size)
+                            // console.log("multiple clusters found...size is", clustersNeighborsBelongTo.size)
                         }
 
                     // temp: only add to points if known cluster ID
@@ -167,7 +185,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                         }
                 }
 
-            // */
+            */
 
             // let circleForScale = [];
 
