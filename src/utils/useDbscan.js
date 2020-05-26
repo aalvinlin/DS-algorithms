@@ -4,8 +4,8 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
 
     sortCoordinates(points);
 
-    // add index to each point
-    points = points.map((point, index) => { return {...point, index}});
+    // add array index to each point
+    points = points.map((point, pointID) => { return {...point, pointID}});
 
     // keep track of outliers and known clusters
     let outliers = new Set();
@@ -38,6 +38,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
 
                             // keep track of all cluster IDs that neighbors belong to
                             // if more than one, will need to merge them all later
+                            // because clustersNeighborsBelongTo is a set, it is not necessary to check for existence of a clusterID before adding
                             if (neighbor.clusterID)
                                 { clustersNeighborsBelongTo.add(clusterID); }
                         }
@@ -48,74 +49,81 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                 }
 
             console.log("🏠 neighbors to point ID", currentPointID, neighbors);
+            console.log("    clustersNeighborsBelongTo:", clustersNeighborsBelongTo)
 
 
             // determine which cluster to place the point in
-            // no known clusters: create a new one with an ID of 0
-            if (knownClusters.length === 0)
-                {
-                    knownClusters[0] === new Set();
-
-                    // create a new cluster ID to use
-                    currentPoint.clusterID = 0;
-
-                    // update all neighbors with new cluster ID
-                    for (let i = 0; i < neighbors.length; i++)
-                        { neighbors[i].clusterID = 0; }
-                }
-            // one cluster found: update current point and its neighbors
-            else if (clustersNeighborsBelongTo.length === 1)
-                {
-                    let knownClusterID = clustersNeighborsBelongTo[0];
-                    
-                    // update cluster ID for current point
-                    currentPoint.clusterID = knownClusterID;
-                    
-                    // add current point to cluster
-                    knownClusters[knownClusterID].add(currentPoint);
-
-                    // update all neighbors with known cluster ID
-                    // also update cluster with each point
-                    for (let i = 0; i < neighbors.length; i++)
-                        {
-                            neighbors[i].clusterID = knownClusterID;
-                            knownClusters[knownClusterID].add(neighbors[i]);
-                        }
-                }
-            // multiple clusters found: merging will have to take place
-            // merge into the cluster with the smallest ID number
-            else
-                {
-
-                }
-
             // if the current point has no neighbors, it is an outlier
             if (neighbors.length === 0)
                 {
                     outliers.add(currentPoint); 
                     currentPoint.type = "outlier";
                 }
-            
-            // if the current point has at least requiredPointsInRadius points, it is a core point
-            else if (neighbors.length + 1 >= requiredPointsInRadius)
-                {
-                    currentPoint.type = "core";
 
-                    // any neighbors with an unknown status can now be updated to a boundary point
-                    for (let i = 0; i < neighbors.length; i++)
-                        {
-                            if (!neighbors[i].type || neighbors[i].type === "?")
-                                {
-                                    neighbors[i].type = "boundary";
-                                }
-                        }
-                }
-            
-            // if the current point has at least one neighbor but fewer than requiredPointsInRadius,
-            // it could either be an outlier or a boundary point
+            // point is either a boundary point or a core point
             else
                 {
-                    currentPoint.type = "?";
+                    let clusterIDToAddTo = null;
+
+                    // no known clusters or no points belong to a cluster yet: create a new one with an ID of 0
+                    if (knownClusters.length === 0 || clustersNeighborsBelongTo.size === 0)
+                        {
+                            // start a new set at the next index for knownClusters
+                            clusterIDToAddTo = knownClusters.length;
+                            knownClusters[clusterIDToAddTo] = new Set();
+                        }
+                    // one cluster found: update current point and its neighbors
+                    else if (clustersNeighborsBelongTo.size === 1)
+                        {
+                            // clusterIDToAddTo = clustersNeighborsBelongTo[0];   
+
+                            console.log("contents of the set...", clustersNeighborsBelongTo.values())
+                        }
+                    // multiple clusters found: merging will have to take place
+                    // merge into the cluster with the smallest ID number
+                    else
+                        {
+                            console.log("contents of the set...multiple clusters?", clustersNeighborsBelongTo.values())
+
+                            console.log("multiple clusters found...size is", clustersNeighborsBelongTo.size)
+                        }
+
+
+
+                    // update cluster ID for current point
+                    // also add current point to cluster
+                    currentPoint.clusterID = clusterIDToAddTo;
+                    knownClusters[clusterIDToAddTo].add(currentPointID);
+
+                    // update all neighbors with known cluster ID
+                    // also update cluster with each point
+                    for (let i = 0; i < neighbors.length; i++)
+                        {
+                            neighbors[i].clusterID = clusterIDToAddTo;
+                            knownClusters[clusterIDToAddTo].add(neighbors[i].pointID);
+                        }
+                    
+                    // if the current point has at least requiredPointsInRadius points, it is a core point
+                    if (neighbors.length + 1 >= requiredPointsInRadius)
+                        {
+                            currentPoint.type = "core";
+
+                            // any neighbors with an unknown status can now be updated to a boundary point
+                            for (let i = 0; i < neighbors.length; i++)
+                                {
+                                    if (!neighbors[i].type || neighbors[i].type === "?")
+                                        {
+                                            neighbors[i].type = "boundary";
+                                        }
+                                }
+                        }
+                    
+                    // if the current point has at least one neighbor but fewer than requiredPointsInRadius,
+                    // it could either be an outlier or a boundary point
+                    else
+                        {
+                            currentPoint.type = "?";
+                        }
                 }
 
             let circleForScale = [];
@@ -132,11 +140,16 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                 
             console.log("current point status:", currentPoint);
             console.log("neighbors:", neighbors);
+            console.log("clusters:", knownClusters);
+            console.log("=========================================");
         }
 
-    console.log("outliers:", outliers);
+    let outliersFormatted = Array.from(outliers);
+
+    console.log("outliers:", outliersFormatted);
     console.log("clusters:", knownClusters);
 
-    return [points];
+    // return [Array.from(outliers)];
+    return [points, outliersFormatted, knownClusters];
     // return [neighbors, points, circleForScale];
 }
