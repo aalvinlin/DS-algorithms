@@ -27,7 +27,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             for (let currentNeighborID = currentPointID + 1; points[currentNeighborID] && Math.abs(currentPoint.x - points[currentNeighborID].x) <= epsilon; currentNeighborID++)
                 {
                     console.log("    point #", currentNeighborID, "'s x-value is within range")
-                    console.log("    all clusters so far:", knownClusters);
+                    // console.log("    all clusters so far:", knownClusters);
 
                     let neighbor = points[currentNeighborID];
                     let distanceToNeighbor = Math.sqrt(Math.abs(currentPoint.x - neighbor.x) ** 2 + Math.abs(currentPoint.y - neighbor.y) ** 2);

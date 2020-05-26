@@ -58,10 +58,29 @@ const Dbscan = () => {
             }
         }
 
+    let inputData = {
+        datasets: [
+            {
+            label: "Data point",
+            backgroundColor: "#333333",
+            pointBackgroundColor: "#333333",
+            pointBorderRadius: 0,
+            pointRadius: 5,
+            data: simpleScatterPlot
+            }
+        ]
+    }
+
     return (
         <>
             <h1>DBSCAN</h1>
+            
+            <h2>Input Data</h2>
+            <Scatter data={inputData} options={options} />
+            
+            <h2>Results of using DBSCAN</h2>
             <Scatter data={chartJSData} options={options} />
+            
         </>
     )
 
