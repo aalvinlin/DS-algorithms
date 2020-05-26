@@ -43,21 +43,40 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
         }
 
 
-    // determine which set to place the point in
-    // if there are no existing sets, or if no point (none of the current point nor its neighbors) is part of a set, start a new one
+    // determine which cluster to place the point in
+    // no known clusters: create a new one with an ID of 0
     if (knownClusters.length === 0)
         {
             knownClusters[0] === new Set();
 
+            // create a new cluster ID to use
             currentPoint.clusterID = 0;
 
+            // update all neighbors with new cluster ID
             for (let i = 0; i < neighbors.length; i++)
                 { neighbors[i].clusterID = 0; }
         }
-    else if (knownClusters.length === 1)
+    // one cluster found: update current point and its neighbors
+    else if (clustersNeighborsBelongTo.length === 1)
         {
+            let knownClusterID = clustersNeighborsBelongTo[0];
+            
+            // update cluster ID for current point
+            currentPoint.clusterID = knownClusterID;
+            
+            // add current point to cluster
+            knownClusters[knownClusterID].add(currentPoint);
 
+            // update all neighbors with known cluster ID
+            // also update cluster with each point
+            for (let i = 0; i < neighbors.length; i++)
+                {
+                    neighbors[i].clusterID = knownClusterID;
+                    knownClusters[knownClusterID].add(neighbors[i]);
+                }
         }
+    // multiple clusters found: merging will have to take place
+    // merge into the cluster with the smallest ID number
     else
         {
 
