@@ -9,7 +9,7 @@ import { useDbscan } from "../utils/useDbscan";
 const Dbscan = () => {
 
     let scatterPlot = createClusters(set2);
-
+    
     // sort by increasing x-coordinates
     // if x-coordinates are the same, sort by increasing y-coordinates
     // let separatedClusters = useDbscan(scatterPlot, 5, 5);
