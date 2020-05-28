@@ -224,7 +224,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
 
     // turn sets back into arrays
     let outliersFormatted = Array.from(outliers);
-    let clustersFormatted = knownClusters.map(cluster => Array.from(outliers));
+    let clustersFormatted = knownClusters.map(cluster => Array.from(cluster).map(pointID => points[pointID]));
 
     console.log("outliers:", outliersFormatted);
     console.log("clusters:", clustersFormatted);
