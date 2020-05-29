@@ -12,6 +12,13 @@
 
 */
 
+@media screen and (min-width: 900px) {
+    #root {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
 body {
     margin: 0;
     padding: 2vw;
@@ -53,7 +60,7 @@ hr {
     color: #333366;
     border: 1px solid;
 
-    width: 80vw;
+    width: 90%;
 }
 
 li {
