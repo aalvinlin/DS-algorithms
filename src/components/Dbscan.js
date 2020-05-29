@@ -58,42 +58,42 @@ const Dbscan = () => {
 
     // console.log(datasets)
 
-    let chartJSData = { datasets };
-    let options = {
-            scales: {
-                xAxes: [{
-                    beginAtZero: true,
-                    ticks: {
-                        min: 0,
-                        // max: 50
-                        // max: 10
-                    }
-                }],
-                yAxes: [{
-                    beginAtZero: true,
-                    ticks: {
-                        min: 0,
-                        // max: 50
-                        // max: 10
-                    }
+    // let chartJSData = { datasets };
+    // let options = {
+    //         scales: {
+    //             xAxes: [{
+    //                 beginAtZero: true,
+    //                 ticks: {
+    //                     min: 0,
+    //                     // max: 50
+    //                     // max: 10
+    //                 }
+    //             }],
+    //             yAxes: [{
+    //                 beginAtZero: true,
+    //                 ticks: {
+    //                     min: 0,
+    //                     // max: 50
+    //                     // max: 10
+    //                 }
                     
-                }]
-            }
-        }
+    //             }]
+    //         }
+    //     }
 
-    let inputData = {
-        datasets: [
-            {
-            label: "Data point",
-            backgroundColor: "#33CCFF",
-            pointBackgroundColor: "#33CCFF",
-            pointBorderRadius: 0,
-            pointRadius: 5,
-            // data: simpleScatterPlot
-            data: possiblePlots[chosenPlot]
-            }
-        ]
-    }
+    // let inputData = {
+    //     datasets: [
+    //         {
+    //         label: "Data point",
+    //         backgroundColor: "#33CCFF",
+    //         pointBackgroundColor: "#33CCFF",
+    //         pointBorderRadius: 0,
+    //         pointRadius: 5,
+    //         // data: simpleScatterPlot
+    //         data: possiblePlots[chosenPlot]
+    //         }
+    //     ]
+    // }
 
     return (
         <div className="try">
@@ -124,10 +124,16 @@ const Dbscan = () => {
             </div>
             
             <h2>Input Data</h2>
-            <Scatter data={inputData} options={options} />
+            {/* <Scatter data={inputData} options={options} /> */}
             
             <h2>Results of using DBSCAN</h2>
-            <Scatter data={chartJSData} options={options} />
+            {/* <Scatter data={chartJSData} options={options} /> */}
+            <pre>
+                {/* {console.log(separatedClusters)} */}
+                {/* {createClusters(possiblePlots[chosenPlot])} */}
+                {/* {createClusters(set2).map(item => item.string())} */}
+                {JSON.stringify(createClusters(set3))}
+            </pre>
             
         </div>
     )
