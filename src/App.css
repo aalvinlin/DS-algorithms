@@ -48,6 +48,8 @@ li {
     text-indent: 0;
 }
 
+/** Home component styling **/
+
 .home p {
     margin-left: 2rem;
     text-indent: 2rem;
@@ -82,4 +84,44 @@ li {
     
     display: block;
     margin: 0 auto;
+}
+
+/** Navbar styling **/
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: 5px solid #333366;
+}
+
+nav a {
+
+    color: #CCCCFF;
+    background-color: #333366;
+
+    font-size: 1.5rem;
+    line-height: 3rem;
+    
+    text-align: center;
+
+    display: block;
+    width: 100%;
+
+    padding: 0 2rem;
+
+    border-right: 5px solid #222233;
+
+    text-decoration: none;
+
+    border-radius: 10px 10px 0 0;
+}
+
+nav a:hover {
+    background-color: #444477;
+}
+
+nav a:last-child() {
+    border-right: none;
 }
