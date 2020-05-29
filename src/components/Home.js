@@ -44,7 +44,7 @@ const Home = () => {
 
             <div className="example1">
                 <Scatter data={scatterPlot1} />
-                <Scatter data={scatterPlot2} />
+                <Scatter data={scatterPlot1} />
             </div>
 
             <p>

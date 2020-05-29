@@ -19,7 +19,7 @@ const Dbscan = () => {
     console.log("the results are...", separatedClusters);
     console.log("#######################################");
 
-    let colors = ["#CCCCCC", "#FF9966", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#996600"];
+    let colors = ["#CCCCFF", "#33CC99", "#FF66CC", "#33CCFF", "#FF9933", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#996600"];
 
     // format clusters for chartJS to display
     let datasets = separatedClusters.map((cluster, index) => {
@@ -62,8 +62,8 @@ const Dbscan = () => {
         datasets: [
             {
             label: "Data point",
-            backgroundColor: "#333333",
-            pointBackgroundColor: "#333333",
+            backgroundColor: "#33CCFF",
+            pointBackgroundColor: "#33CCFF",
             pointBorderRadius: 0,
             pointRadius: 5,
             data: simpleScatterPlot
@@ -72,8 +72,8 @@ const Dbscan = () => {
     }
 
     return (
-        <>
-            <h1>DBSCAN</h1>
+        <div className="try">
+            <h2 className="alternateColor">Try using DBSCAN</h2>
             
             <h2>Input Data</h2>
             <Scatter data={inputData} options={options} />
@@ -81,7 +81,7 @@ const Dbscan = () => {
             <h2>Results of using DBSCAN</h2>
             <Scatter data={chartJSData} options={options} />
             
-        </>
+        </div>
     )
 
 }
