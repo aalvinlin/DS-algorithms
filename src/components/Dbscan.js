@@ -9,6 +9,7 @@ import { useDbscan } from "../utils/useDbscan";
 const Dbscan = () => {
 
     let possiblePlots = [simpleScatterPlot, set1, set2, set3];
+    let possiblePlotNames = ["Simple Plot", "Two Arcs", "Three Clusters", "Multiple Clusters"];
 
     let [chosenPlot, setChosenPlot] = useState(0);
     let [chosenRadius, setChosenRadius] = useState(2.5);
@@ -102,10 +103,9 @@ const Dbscan = () => {
 
             <div className="plotSelection">
                 <ol>
-                    <li className={"plotOption" + (chosenPlot === 0 ? " selectedPlot" : "")} onClick={() => setChosenPlot(0)}>Simple Plot</li>
-                    <li className={"plotOption" + (chosenPlot === 1 ? " selectedPlot" : "")} onClick={() => setChosenPlot(1)}>Two Arcs</li>
-                    <li className={"plotOption" + (chosenPlot === 2 ? " selectedPlot" : "")} onClick={() => setChosenPlot(2)}>Three Clusters</li>
-                    <li className={"plotOption" + (chosenPlot === 3 ? " selectedPlot" : "")} onClick={() => setChosenPlot(3)}>Multiple Clusters</li>
+                    {
+                        possiblePlotNames.map((name, index) => <li className={"plotOption" + (chosenPlot === index ? " selectedPlot" : "")} onClick={() => setChosenPlot(index)}>{name}</li>)
+                    }
                 </ol>
                 
                 <form name="plotParameters" className="plotParameters" onSubmit={event => event.preventDefault()}>
