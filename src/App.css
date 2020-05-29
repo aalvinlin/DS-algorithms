@@ -24,21 +24,29 @@ body {
 h1 {
     border-bottom: 2px solid;
     color: #666699;
+    font-size: 2rem;
 }
 
 h2 {
     color: #33CC99;
+    font-size: 1.5rem;
 }
 
 h3 {
     color: #33CC99;
+    font-size: 1.25rem;
     font-style: oblique;
     margin-left: 2rem;
 }
 
 h4 {
     color: #33CCFF;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+}
+
+/* alternate color scheme for headings */
+.alternateColor {
+    color: #33CCFF;
 }
 
 hr {

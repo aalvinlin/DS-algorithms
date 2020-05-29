@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <div className="home">
 
-            <h4>Learn about DBSCAN</h4>
+            <h2 className="alternateColor">Learn about DBSCAN</h2>
 
             <p>
                 DBSCAN is an algorithm that categorizes data points into clusters according to how close they are to each other.
