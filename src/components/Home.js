@@ -4,13 +4,16 @@ import { Scatter } from "react-chartjs-2";
 import { set1, set2, set3, simpleScatterPlot } from "../data/data";
 import { createClusters } from "../utils/generateClusters";
 
+import image1 from "url:../images/DBSCAN_intro_1.png";
+import image2 from "url:../images/DBSCAN_intro_2.png";
+
 const Home = () => {
 
     let scatterPlot1 = {
         datasets: [
             {
                 label: "Scatter Plot #1",
-                pointBackgroundColor: "#CCCCFF",
+                pointBackgroundColor: "#33CCFF",
                 data: createClusters(set2)
 
             }
@@ -21,7 +24,7 @@ const Home = () => {
         datasets: [
             {
                 label: "Scatter Plot #2",
-                pointBackgroundColor: "#CCCCFF",
+                pointBackgroundColor: "#33CCFF",
                 data: createClusters(set3)
 
             }
@@ -51,9 +54,29 @@ const Home = () => {
                     DBSCAN requires two parameters to specify the density of clusters:
                     <ol>
                         <li>the distance from each point (epsilon, <em>&epsilon;</em>) where additional points should be found</li>
-                        <li>the number of points (<em>k</em>) that should be in the circle with radius <em>&epsilon;</em></li>
+                        <li>the number of points (<em>n</em>) that should be in the circle with radius <em>&epsilon;</em></li>
                     </ol>
+
+                    For each point in the dataset, a circle with radius <em>&epsilon;</em> is drawn around it. The number of points inside the circle is then checked against the specified minimum (<em>n</em>).
                 </p>
+
+                <hr />
+
+                <p>Suppose the required minimum <em>n</em> is 5 for both of the examples below.</p>
+
+                <div className="example2ImgContainer">
+                    <div className="example2a">
+                        <img src={image1} />
+                        5 points in circle.
+                    </div>
+                    <div className="example2b">
+                        <img src={image2} />
+                        3 points in circle.
+                    </div>
+                </div>
+
+                <hr />
+
 
             </div>
         </div>

@@ -2,6 +2,16 @@
     font-family: Ariral, Verdana, sans-serif;
 }
 
+/*
+
+#222233: dark purple background
+#333366: muted purple
+#CCCCFF: light purple
+#FF66CC: bright pink
+#33CC99: aqua
+
+*/
+
 body {
     margin: 0;
     padding: 2vw;
@@ -13,11 +23,24 @@ body {
 
 h1 {
     border-bottom: 2px solid;
+    color: #666699;
+}
+
+h2 {
+    color: #33CC99;
 }
 
 h3 {
+    color: #33CC99;
     font-style: oblique;
     margin-left: 2rem;
+}
+
+hr {
+    color: #333366;
+    border: 1px solid;
+
+    width: 80vw;
 }
 
 .home p {
@@ -28,4 +51,25 @@ h3 {
 .home em {
     font-style: oblique;
     font-weight: bold;
+}
+
+.example2 p {
+    text-indent: 0;
+    margin: 0.5rem;
+}
+
+.example2ImgContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    text-align: center;
+}
+
+.example2ImgContainer img {
+    width: 90%;
+    height: auto;
+    
+    display: block;
+    margin: 0 auto;
 }
