@@ -36,6 +36,11 @@ h3 {
     margin-left: 2rem;
 }
 
+h4 {
+    color: #33CCFF;
+    font-size: 1.5rem;
+}
+
 hr {
     color: #333366;
     border: 1px solid;
@@ -93,7 +98,7 @@ nav {
     justify-content: space-around;
     align-items: center;
 
-    border-bottom: 5px solid #333366;
+    border-bottom: 5px solid #666699;
 }
 
 nav a {
@@ -118,10 +123,10 @@ nav a {
     border-radius: 10px 10px 0 0;
 }
 
-nav a:hover {
-    background-color: #444477;
+nav a.active {
+    background-color: #666699;
 }
 
-nav a:last-child() {
-    border-right: none;
+nav a {
+    border-left: 5px solid #222233;
 }
