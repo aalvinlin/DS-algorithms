@@ -20,8 +20,6 @@ const Dbscan = () => {
 
     const submitForm = () => {
 
-        console.log(chosenRadius, chosenDensity);
-
         setSeparatedClusters(useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity));
     }
 
@@ -42,8 +40,6 @@ const Dbscan = () => {
             data: cluster
         }
     })
-
-    console.log(datasets)
 
     let chartJSData = { datasets };
     let options = {
@@ -105,8 +101,6 @@ const Dbscan = () => {
                 </form>
             </div>
 
-            <p>{chosenPlot, possiblePlotNames[chosenPlot]}</p>
-            
             <h2>Input Data</h2>
             <Scatter data={inputData} options={options} />
             
