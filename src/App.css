@@ -196,3 +196,22 @@ nav a {
     border: 0;
     border-radius: 2px;
 }
+
+.plotParameters button {
+    font-size: 1.2rem;
+    line-height: 2.5rem;
+
+    display: block;
+    margin: 0 auto;
+
+    color: #CCCCFF;
+    background-color: #333366;
+    border: 2px solid #666699;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.plotParameters button:hover {
+    color: #FF66CC;
+}
