@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Scatter } from "react-chartjs-2";
 
-import { set1, set2, set3, simpleScatterPlot } from "../data/data";
+import { simpleScatterPlot, scatterPlot1, scatterPlot2, scatterPlot3 } from "../data/data";
 
-import { createClusters } from "../utils/generateClusters";
 import { useDbscan } from "../utils/useDbscan";
 
 const Dbscan = () => {
 
-    let possiblePlots = [simpleScatterPlot, set1, set2, set3];
+    let possiblePlots = [simpleScatterPlot, scatterPlot1, scatterPlot2, scatterPlot3];
     let possiblePlotNames = ["Simple Plot", "Two Arcs", "Three Clusters", "Multiple Clusters"];
 
     let [chosenPlot, setChosenPlot] = useState(0);
@@ -17,26 +16,12 @@ const Dbscan = () => {
 
     let [separatedClusters, setSeparatedClusters] = useState([]);
 
-    // useEffect(() => {
-
-    //     separatedClusters = useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity);
-    //     // setSeparatedClusters(useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity));
-
-    // }, [chosenPlot, chosenRadius, chosenDensity])
-
     const submitForm = () => {
 
         console.log(chosenRadius, chosenDensity);
 
         setSeparatedClusters(useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity));
     }
-
-    // let scatterPlot = createClusters(set2);
-    
-    // sort by increasing x-coordinates
-    // if x-coordinates are the same, sort by increasing y-coordinates
-    // separatedClusters = useDbscan(scatterPlot, 5, 5);
-    // separatedClusters = useDbscan(simpleScatterPlot, 2.5, 2);
 
     // console.log("#######################################");
     // console.log("the results are...", separatedClusters);
@@ -56,44 +41,39 @@ const Dbscan = () => {
         }
     })
 
-    // console.log(datasets)
+    console.log(datasets)
 
-    // let chartJSData = { datasets };
-    // let options = {
-    //         scales: {
-    //             xAxes: [{
-    //                 beginAtZero: true,
-    //                 ticks: {
-    //                     min: 0,
-    //                     // max: 50
-    //                     // max: 10
-    //                 }
-    //             }],
-    //             yAxes: [{
-    //                 beginAtZero: true,
-    //                 ticks: {
-    //                     min: 0,
-    //                     // max: 50
-    //                     // max: 10
-    //                 }
+    let chartJSData = { datasets };
+    let options = {
+            scales: {
+                xAxes: [{
+                    beginAtZero: true,
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                yAxes: [{
+                    beginAtZero: true,
+                    ticks: {
+                        min: 0,
+                    }
                     
-    //             }]
-    //         }
-    //     }
+                }]
+            }
+        }
 
-    // let inputData = {
-    //     datasets: [
-    //         {
-    //         label: "Data point",
-    //         backgroundColor: "#33CCFF",
-    //         pointBackgroundColor: "#33CCFF",
-    //         pointBorderRadius: 0,
-    //         pointRadius: 5,
-    //         // data: simpleScatterPlot
-    //         data: possiblePlots[chosenPlot]
-    //         }
-    //     ]
-    // }
+    let inputData = {
+        datasets: [
+            {
+            label: "Data point",
+            backgroundColor: "#33CCFF",
+            pointBackgroundColor: "#33CCFF",
+            pointBorderRadius: 0,
+            pointRadius: 5,
+            data: possiblePlots[chosenPlot]
+            }
+        ]
+    }
 
     return (
         <div className="try">
@@ -124,17 +104,11 @@ const Dbscan = () => {
             </div>
             
             <h2>Input Data</h2>
-            {/* <Scatter data={inputData} options={options} /> */}
+            <Scatter data={inputData} options={options} />
             
             <h2>Results of using DBSCAN</h2>
-            {/* <Scatter data={chartJSData} options={options} /> */}
-            <pre>
-                {/* {console.log(separatedClusters)} */}
-                {/* {createClusters(possiblePlots[chosenPlot])} */}
-                {/* {createClusters(set2).map(item => item.string())} */}
-                {JSON.stringify(createClusters(set3))}
-            </pre>
-            
+            <Scatter data={chartJSData} options={options} />
+             
         </div>
     )
 
