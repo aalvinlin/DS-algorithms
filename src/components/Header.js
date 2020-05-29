@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./Navbar";
 
 const Header = () => {
 
@@ -8,6 +9,8 @@ const Header = () => {
 
             <h2>DBSCAN</h2>
             <h3>Density-based spatial clustering of applications with noise</h3>
+
+            <Navbar />
 
         </header>
     )

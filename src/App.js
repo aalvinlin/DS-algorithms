@@ -12,12 +12,15 @@ const App = () =>
   return (
     <>
       <Header />
-      
+
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/dbscan">
+        <Route exact path="/try">
+          <Dbscan />
+        </Route>
+        <Route exact path="/investigate">
           <Dbscan />
         </Route>
         <Route>
