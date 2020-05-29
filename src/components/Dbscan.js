@@ -12,22 +12,34 @@ const Dbscan = () => {
 
     let [chosenPlot, setChosenPlot] = useState(0);
     let [chosenRadius, setChosenRadius] = useState(2.5);
-    let [chosenDensity, setChosenDensity] = useState(5);
+    let [chosenDensity, setChosenDensity] = useState(2);
 
-    useEffect(() => {
+    let [separatedClusters, setSeparatedClusters] = useState([]);
 
-    }, [chosenPlot, chosenRadius, chosenDensity])
+    // useEffect(() => {
 
-    let scatterPlot = createClusters(set2);
+    //     separatedClusters = useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity);
+    //     // setSeparatedClusters(useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity));
+
+    // }, [chosenPlot, chosenRadius, chosenDensity])
+
+    const submitForm = () => {
+
+        console.log(chosenRadius, chosenDensity);
+
+        setSeparatedClusters(useDbscan(possiblePlots[chosenPlot], chosenRadius, chosenDensity));
+    }
+
+    // let scatterPlot = createClusters(set2);
     
     // sort by increasing x-coordinates
     // if x-coordinates are the same, sort by increasing y-coordinates
-    // let separatedClusters = useDbscan(scatterPlot, 5, 5);
-    let separatedClusters = useDbscan(simpleScatterPlot, 2.5, 2);
+    // separatedClusters = useDbscan(scatterPlot, 5, 5);
+    // separatedClusters = useDbscan(simpleScatterPlot, 2.5, 2);
 
-    console.log("#######################################");
-    console.log("the results are...", separatedClusters);
-    console.log("#######################################");
+    // console.log("#######################################");
+    // console.log("the results are...", separatedClusters);
+    // console.log("#######################################");
 
     let colors = ["#CCCCFF", "#33CC99", "#FF66CC", "#33CCFF", "#FF9933", "#339966", "#66CCFF", "#333399", "#FFFF66", "#996633", "#333333", "#CC9966", "#996600"];
 
@@ -43,7 +55,7 @@ const Dbscan = () => {
         }
     })
 
-    console.log(datasets)
+    // console.log(datasets)
 
     let chartJSData = { datasets };
     let options = {
@@ -76,7 +88,8 @@ const Dbscan = () => {
             pointBackgroundColor: "#33CCFF",
             pointBorderRadius: 0,
             pointRadius: 5,
-            data: simpleScatterPlot
+            // data: simpleScatterPlot
+            data: possiblePlots[chosenPlot]
             }
         ]
     }
@@ -105,6 +118,8 @@ const Dbscan = () => {
                         <em>n</em> (density)
                         <input type="text" name="plotDensity" value={chosenDensity} onChange={event => setChosenDensity(event.target.value)} />
                     </label>
+
+                    <button onClick={submitForm}>Process Data</button>
                 </form>
             </div>
             
