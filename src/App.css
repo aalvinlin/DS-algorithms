@@ -1,0 +1,217 @@
+* {
+    font-family: Arial, Verdana, sans-serif;
+}
+
+/*
+
+#222233: dark purple background
+#333366: muted purple
+#CCCCFF: light purple
+#FF66CC: bright pink
+#33CC99: aqua
+
+*/
+
+@media screen and (min-width: 900px) {
+    #root {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 2vw;
+
+    background-color: #222233;
+
+    color: #CCCCFF;
+}
+
+h1 {
+    border-bottom: 2px solid;
+    color: #666699;
+    font-size: 2rem;
+}
+
+h2 {
+    color: #33CC99;
+    font-size: 1.5rem;
+}
+
+h3 {
+    color: #33CC99;
+    font-size: 1.25rem;
+    font-style: oblique;
+    margin-left: 2rem;
+}
+
+h4 {
+    color: #33CCFF;
+    font-size: 1.2rem;
+}
+
+/* alternate color scheme for headings */
+.alternateColor {
+    color: #33CCFF;
+}
+
+hr {
+    color: #333366;
+    border: 1px solid;
+
+    width: 90%;
+}
+
+li {
+    margin-bottom: 1rem;
+    text-indent: 0;
+}
+
+em {
+    font-style: oblique;
+    font-weight: bold;
+    color: #33CC99;
+}
+
+/** Home component styling **/
+
+.home p {
+    margin-left: 2rem;
+    text-indent: 2rem;
+}
+
+.example2 p {
+    text-indent: 0;
+    margin: 0.5rem;
+}
+
+.exampleImgContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    text-align: center;
+}
+
+.exampleImgContainer div {
+    width: 50%;
+}
+
+.exampleImgContainer img {
+    width: 90%;
+    height: auto;
+    
+    display: block;
+    margin: 0 auto;
+}
+
+/** Navbar styling **/
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: 5px solid #666699;
+}
+
+nav a {
+
+    color: #CCCCFF;
+    background-color: #333366;
+
+    font-size: 1.5rem;
+    line-height: 3rem;
+    
+    text-align: center;
+
+    display: block;
+    width: 100%;
+
+    padding: 0 2rem;
+
+    border-right: 5px solid #222233;
+
+    text-decoration: none;
+
+    border-radius: 10px 10px 0 0;
+}
+
+nav a.active {
+    background-color: #666699;
+}
+
+nav a {
+    border-left: 5px solid #222233;
+}
+
+/* Dbscan component ("try" page) */
+
+.plotSelection {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.plotOption {
+    font-weight: bold;
+}
+
+.plotOption:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.selectedPlot {
+    color: #FF66CC;
+}
+
+.plotSelection ol, .plotSelection form {
+    width: 50%;
+}
+
+.plotParameters label {
+    display: block;
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.plotParameters input {
+    width: 4rem;
+
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    text-align: center;
+
+    padding: 0 1rem;
+
+    display: block;
+    margin: 1rem auto;
+
+    color: #33CC99;
+    background-color: #333366;
+    border: 0;
+    border-radius: 2px;
+}
+
+.plotParameters button {
+    font-size: 1.2rem;
+    line-height: 2.5rem;
+
+    display: block;
+    margin: 0 auto;
+
+    color: #CCCCFF;
+    background-color: #333366;
+    border: 2px solid #666699;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.plotParameters button:hover {
+    color: #FF66CC;
+}
