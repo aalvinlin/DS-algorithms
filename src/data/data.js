@@ -136,3 +136,18 @@ export const set3 = {
         randomOffset: 0.1,
     }
 }
+
+// use with an epislon of 2 and a density of 3
+export const simpleScatterPlot = [
+    {x: 1, y: 1},
+    {x: 2, y: 5},
+    {x: 3, y: 6},
+    {x: 3, y: 4},
+    {x: 4, y: 4},
+    {x: 5, y: 5},
+    {x: 5, y: 6},
+    {x: 5, y: 7},
+    {x: 6, y: 2},
+    {x: 8, y: 6},
+    {x: 10, y: 4},
+]
