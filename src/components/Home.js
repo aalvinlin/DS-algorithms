@@ -77,6 +77,16 @@ const Home = () => {
 
                 <hr />
 
+                <p>A <em class="term">core point</em> has at least the minimum number of points in its circle. It will be part of a cluster.</p>
+
+                <p>
+                    A point that does not meet the minimum number of points in its circle might be either a <em class="term">boundary point</em> or an <em class="term">outlier</em>.
+                    <ul>
+                        <li>A <em class="term">boundary point</em> is not a core point, but has at least one core point within its circle. It will be part of the same cluster as the core point.</li>
+                        <li>An <em class="term">outlier</em> does not have any core points in its circle. It will not be part of any cluster.</li>
+                    </ul>
+                </p>
+
 
             </div>
         </div>

@@ -43,6 +43,11 @@ hr {
     width: 80vw;
 }
 
+li {
+    margin-bottom: 1rem;
+    text-indent: 0;
+}
+
 .home p {
     margin-left: 2rem;
     text-indent: 2rem;
@@ -51,6 +56,7 @@ hr {
 .home em {
     font-style: oblique;
     font-weight: bold;
+    color: #33CC99;
 }
 
 .example2 p {
