@@ -1,0 +1,31 @@
+* {
+    font-family: Ariral, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 2vw;
+
+    background-color: #222233;
+
+    color: #CCCCFF;
+}
+
+h1 {
+    border-bottom: 2px solid;
+}
+
+h3 {
+    font-style: oblique;
+    margin-left: 2rem;
+}
+
+.home p {
+    margin-left: 2rem;
+    text-indent: 2rem;
+}
+
+.home em {
+    font-style: oblique;
+    font-weight: bold;
+}
