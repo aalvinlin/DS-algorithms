@@ -7,6 +7,8 @@ import { useDbscan } from "../utils/useDbscan";
 
 const Dbscan = () => {
 
+    // chartJS bug? can't go back to first option after selecting the others.
+    // happens even when simpleScatterPlot is last in the list
     let possiblePlots = [simpleScatterPlot, scatterPlot1, scatterPlot2, scatterPlot3];
     let possiblePlotNames = ["Simple Plot", "Two Arcs", "Three Clusters", "Multiple Clusters"];
 
@@ -102,6 +104,8 @@ const Dbscan = () => {
                     <button onClick={submitForm}>Process Data</button>
                 </form>
             </div>
+
+            <p>{chosenPlot, possiblePlotNames[chosenPlot]}</p>
             
             <h2>Input Data</h2>
             <Scatter data={inputData} options={options} />
