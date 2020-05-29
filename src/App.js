@@ -14,13 +14,13 @@ const App = () =>
       <Header />
 
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/dbscan/learn">
           <Home />
         </Route>
-        <Route exact path="/try">
+        <Route exact path="/dbscan/try">
           <Dbscan />
         </Route>
-        <Route exact path="/investigate">
+        <Route exact path="/dbscan/investigate">
           <Dbscan />
         </Route>
         <Route>
