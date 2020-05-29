@@ -4,8 +4,10 @@ import { Scatter } from "react-chartjs-2";
 import { set1, set2, set3, simpleScatterPlot } from "../data/data";
 import { createClusters } from "../utils/generateClusters";
 
-import image1 from "url:../images/DBSCAN_intro_1.png";
-import image2 from "url:../images/DBSCAN_intro_2.png";
+import example2a from "url:../images/DBSCAN_intro_2a.png";
+import example2b from "url:../images/DBSCAN_intro_2b.png";
+import example3a from "url:../images/DBSCAN_intro_3a.png";
+import example3b from "url:../images/DBSCAN_intro_3b.png";
 
 const Home = () => {
 
@@ -64,14 +66,16 @@ const Home = () => {
 
                 <p>Suppose the required minimum <em>n</em> is 5 for both of the examples below.</p>
 
-                <div className="example2ImgContainer">
+                <div className="exampleImgContainer">
                     <div className="example2a">
-                        <img src={image1} />
-                        5 points in circle.
+                        <img src={example2a} />
+                        5 points in circle.<br />
+                        Minimum met.
                     </div>
                     <div className="example2b">
-                        <img src={image2} />
-                        3 points in circle.
+                        <img src={example2b} />
+                        3 points in circle.<br />
+                        Minimum not met.
                     </div>
                 </div>
 
@@ -87,6 +91,22 @@ const Home = () => {
                     </ul>
                 </p>
 
+                <hr />
+
+                <p>The required minimum <em>n</em> is again 5 for the two examples below.</p>
+
+                <div className="exampleImgContainer">
+                    <div className="example3a">
+                        <img src={example3a} />
+                        <em class="term">boundary point</em><br />
+                        There is at least one core point in the circle.
+                    </div>
+                    <div className="example3b">
+                        <img src={example3b} />
+                        <em class="term">outlier</em><br />
+                        None of the other points in the circle are core points.
+                    </div>
+                </div>
 
             </div>
         </div>

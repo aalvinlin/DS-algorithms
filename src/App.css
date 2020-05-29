@@ -1,5 +1,5 @@
 * {
-    font-family: Ariral, Verdana, sans-serif;
+    font-family: Arial, Verdana, sans-serif;
 }
 
 /*
@@ -64,7 +64,7 @@ li {
     margin: 0.5rem;
 }
 
-.example2ImgContainer {
+.exampleImgContainer {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -72,7 +72,11 @@ li {
     text-align: center;
 }
 
-.example2ImgContainer img {
+.exampleImgContainer div {
+    width: 50%;
+}
+
+.exampleImgContainer img {
     width: 90%;
     height: auto;
     
