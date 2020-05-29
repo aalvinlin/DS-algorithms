@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Scatter } from "react-chartjs-2";
 
 import { set1, set2, set3, simpleScatterPlot } from "../data/data";
@@ -7,6 +7,16 @@ import { createClusters } from "../utils/generateClusters";
 import { useDbscan } from "../utils/useDbscan";
 
 const Dbscan = () => {
+
+    let possiblePlots = [simpleScatterPlot, set1, set2, set3];
+
+    let [chosenPlot, setChosenPlot] = useState(0);
+    let [chosenRadius, setChosenRadius] = useState(2.5);
+    let [chosenDensity, setChosenDensity] = useState(5);
+
+    useEffect(() => {
+
+    }, [chosenPlot, chosenRadius, chosenDensity])
 
     let scatterPlot = createClusters(set2);
     
@@ -74,6 +84,29 @@ const Dbscan = () => {
     return (
         <div className="try">
             <h2 className="alternateColor">Try using DBSCAN</h2>
+
+            <p>Select a dataset from the list below, or create your own.</p>
+
+            <div className="plotSelection">
+                <ol>
+                    <li className={"plotOption" + (chosenPlot === 0 ? " selectedPlot" : "")} onClick={() => setChosenPlot(0)}>Simple Plot</li>
+                    <li className={"plotOption" + (chosenPlot === 1 ? " selectedPlot" : "")} onClick={() => setChosenPlot(1)}>Two Arcs</li>
+                    <li className={"plotOption" + (chosenPlot === 2 ? " selectedPlot" : "")} onClick={() => setChosenPlot(2)}>Three Clusters</li>
+                    <li className={"plotOption" + (chosenPlot === 3 ? " selectedPlot" : "")} onClick={() => setChosenPlot(3)}>Multiple Clusters</li>
+                </ol>
+                
+                <form name="plotParameters" className="plotParameters" onSubmit={event => event.preventDefault()}>
+                    <label>
+                        <em>&epsilon;</em> (radius)
+                        <input type="text" name="plotRadius" value={chosenRadius} onChange={event => setChosenRadius(event.target.value)} />
+                    </label>
+
+                    <label>
+                        <em>n</em> (density)
+                        <input type="text" name="plotDensity" value={chosenDensity} onChange={event => setChosenDensity(event.target.value)} />
+                    </label>
+                </form>
+            </div>
             
             <h2>Input Data</h2>
             <Scatter data={inputData} options={options} />

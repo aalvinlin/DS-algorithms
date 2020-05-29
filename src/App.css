@@ -68,17 +68,17 @@ li {
     text-indent: 0;
 }
 
+em {
+    font-style: oblique;
+    font-weight: bold;
+    color: #33CC99;
+}
+
 /** Home component styling **/
 
 .home p {
     margin-left: 2rem;
     text-indent: 2rem;
-}
-
-.home em {
-    font-style: oblique;
-    font-weight: bold;
-    color: #33CC99;
 }
 
 .example2 p {
@@ -144,4 +144,55 @@ nav a.active {
 
 nav a {
     border-left: 5px solid #222233;
+}
+
+/* Dbscan component ("try" page) */
+
+.plotSelection {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.plotOption {
+    font-weight: bold;
+}
+
+.plotOption:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.selectedPlot {
+    color: #FF66CC;
+}
+
+.plotSelection ol, .plotSelection form {
+    width: 50%;
+}
+
+.plotParameters label {
+    display: block;
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.plotParameters input {
+    width: 4rem;
+
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    text-align: center;
+
+    padding: 0 1rem;
+
+    display: block;
+    margin: 1rem auto;
+
+    color: #33CC99;
+    background-color: #333366;
+    border: 0;
+    border-radius: 2px;
 }
