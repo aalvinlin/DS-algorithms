@@ -105,7 +105,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                     let clusterIDToAddTo = null;
 
                     // no known clusters yet: create a new cluster
-                    if (knownClusters.length === 0)
+                    if (knownClusters.length === 0 || clustersNeighborsBelongTo.size === 0)
                         {
                             // console.log("starting a new cluster.")
 
@@ -114,11 +114,11 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                             knownClusters[clusterIDToAddTo] = new Set();
                         }
                     // no points in radius belong to a cluster
-                    else if (clustersNeighborsBelongTo.size === 0)
-                        {
-                            // console.log(clustersNeighborsBelongTo)
-                            // console.log("no neighbors in cluster yet.");
-                        }
+                    // else if (clustersNeighborsBelongTo.size === 0)
+                    //     {
+                    //         // console.log(clustersNeighborsBelongTo)
+                    //         // console.log("no neighbors in cluster yet.");
+                    //     }
                     // one cluster found: update current point and its neighbors
                     else if (clustersNeighborsBelongTo.size === 1)
                         {
@@ -138,7 +138,7 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
                     // merge into the cluster with the smallest ID number
                     else
                         {
-                            // console.log("neighbors belong to multiple clusters.", clusterIDToAddTo);
+                            console.log("neighbors belong to multiple clusters.", clusterIDToAddTo);
                             // console.log("contents of the set...multiple clusters?", clustersNeighborsBelongTo.values())
 
                             // console.log("multiple clusters found...size is", clustersNeighborsBelongTo.size)

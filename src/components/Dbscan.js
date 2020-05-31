@@ -36,7 +36,7 @@ const Dbscan = () => {
             backgroundColor: colors[index],
             pointBackgroundColor: colors[index],
             pointBorderRadius: 0,
-            pointRadius: 5,
+            pointRadius: 2,
             data: cluster
         }
     })
@@ -67,7 +67,7 @@ const Dbscan = () => {
             backgroundColor: "#33CCFF",
             pointBackgroundColor: "#33CCFF",
             pointBorderRadius: 0,
-            pointRadius: 5,
+            pointRadius: 2,
             data: possiblePlots[chosenPlot]
             }
         ]
@@ -106,6 +106,19 @@ const Dbscan = () => {
             
             <h2>Results of using DBSCAN</h2>
             <Scatter data={chartJSData} options={options} />
+
+            { (separatedClusters.length > 0) ?
+
+            <>
+                <p>
+                    Clusters found: {separatedClusters.length - 1}
+                </p>
+                <p>
+                    Outliers found: {separatedClusters[0].length}
+                </p>
+            </>
+
+            : <></> }
              
         </div>
     )
