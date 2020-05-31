@@ -82,7 +82,7 @@ const Dbscan = () => {
             <div className="plotSelection">
                 <ol>
                     {
-                        possiblePlotNames.map((name, index) => <li className={"plotOption" + (chosenPlot === index ? " selectedPlot" : "")} onClick={() => setChosenPlot(index)}>{name}</li>)
+                        possiblePlotNames.map((name, index) => <li key={"plot" + index} className={"plotOption" + (chosenPlot === index ? " selectedPlot" : "")} onClick={() => setChosenPlot(index)}>{name}</li>)
                     }
                 </ol>
                 

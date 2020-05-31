@@ -49,11 +49,13 @@ const Home = () => {
 
             <p>
                 DBSCAN requires two parameters to specify the density of clusters:
+            </p>
                 <ol>
                     <li>the distance from each point (epsilon, <em>&epsilon;</em>) where additional points should be found</li>
                     <li>the number of points (<em>n</em>) that should be in the circle with radius <em>&epsilon;</em></li>
                 </ol>
 
+            <p>
                 For each point in the dataset, a circle with radius <em>&epsilon;</em> is drawn around it. The number of points inside the circle is then checked against the specified minimum (<em>n</em>).
             </p>
 
@@ -76,15 +78,17 @@ const Home = () => {
 
             <hr />
 
-            <p>A <em class="term">core point</em> has at least the minimum number of points in its circle. It will be part of a cluster.</p>
+            <p>A <em className="term">core point</em> has at least the minimum number of points in its circle. It will be part of a cluster.</p>
 
             <p>
-                A point that does not meet the minimum number of points in its circle might be either a <em class="term">boundary point</em> or an <em class="term">outlier</em>.
-                <ul>
-                    <li>A <em class="term">boundary point</em> is not a core point, but has at least one core point within its circle. It will be part of the same cluster as the core point.</li>
-                    <li>An <em class="term">outlier</em> does not have any core points in its circle. It will not be part of any cluster.</li>
-                </ul>
+                A point that does not meet the minimum number of points in its circle might be either a <em className="term">boundary point</em> or an <em className="term">outlier</em>.
             </p>
+
+            <ul>
+                <li>A <em className="term">boundary point</em> is not a core point, but has at least one core point within its circle. It will be part of the same cluster as the core point.</li>
+                <li>An <em className="term">outlier</em> does not have any core points in its circle. It will not be part of any cluster.</li>
+            </ul>
+            
 
             <hr />
 
@@ -93,12 +97,12 @@ const Home = () => {
             <div className="exampleImgContainer">
                 <div className="example3a">
                     <img src={example3a} />
-                    <em class="term">boundary point</em><br />
+                    <em className="term">boundary point</em><br />
                     There is at least one core point in the circle.
                 </div>
                 <div className="example3b">
                     <img src={example3b} />
-                    <em class="term">outlier</em><br />
+                    <em className="term">outlier</em><br />
                     None of the other points in the circle are core points.
                 </div>
             </div>
