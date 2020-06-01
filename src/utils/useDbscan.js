@@ -222,6 +222,27 @@ export const useDbscan = (points, epsilon, requiredPointsInRadius) => {
             // console.log("=========================================");
         }
 
+    // any clusters that do not have a core point should be turned back into outliers
+    // this is necessary because the points are examined from left to right; it is not known when a particular cluster will have no more points added to it
+    for (let clusterID = 0; clusterID < knownClusters.length; clusterID += 1)
+        {
+            let currentCluster = knownClusters[clusterID];
+
+            // mark all points in cluster as outliers, and set array entry to null
+            if (currentCluster.size < requiredPointsInRadius)
+                {
+                    for (let pointID of currentCluster)
+                        {
+                            points[pointID].type = "outlier";
+                            outliers.add(points[pointID])
+                        }
+                    knownClusters[clusterID] = null;
+                }
+        }
+
+    // remove the clusters previously marked as null
+    knownClusters = knownClusters.filter(cluster => cluster);
+
     // turn sets back into arrays
     let outliersFormatted = Array.from(outliers);
     let clustersFormatted = knownClusters.map(cluster => Array.from(cluster).map(pointID => points[pointID]));
